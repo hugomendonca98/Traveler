@@ -1,7 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 import { backgroundPrimary, textPrimary } from './Colors';
-
 
 export const GlobalStyles = createGlobalStyle`
     * {
@@ -12,5 +11,6 @@ export const GlobalStyles = createGlobalStyle`
     body {
         background: ${backgroundPrimary};
         color: ${textPrimary};
+        font-family: 'Barlow', sans-serif;
     }
 `;
