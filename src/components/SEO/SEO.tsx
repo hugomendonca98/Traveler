@@ -18,7 +18,7 @@ export default function SEO({
 }: SEOProps): JSX.Element {
   const pageTitle = `${title} ${!shouldExcludeTitleSuffix ? '| Traveler' : ''}`;
   const pageImage = image
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/${image}`
+    ? `${process.env.NEXT_PUBLIC_SITE_URL}/images/${image}`
     : null;
 
   return (

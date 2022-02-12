@@ -1,38 +1,12 @@
-import Image from 'next/image';
 import styled from 'styled-components';
-import {
-  backgroundOrange,
-  backgroundSecundary,
-  textPrimary,
-  textSecundary,
-  textWhite,
-} from './Colors';
+import { lighten } from 'polished';
+import Image from 'next/image';
 
-export const Conatiner = styled.div`
+import { colors } from './Colors';
+
+export const Container = styled.div`
   width: 1140px;
   margin: auto;
-`;
-
-export const Nav = styled.nav`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  height: 100px;
-`;
-
-export const ToDashboardBtn = styled.a`
-  background-color: ${backgroundSecundary};
-  padding: 10px 30px 10px 30px;
-  border-radius: 10px;
-  text-decoration: none;
-  color: ${textPrimary};
-  font-family: Heebo;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 26px;
-  text-decoration: none;
 `;
 
 export const Main = styled.main`
@@ -46,10 +20,12 @@ export const MainText = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: justify;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 50px;
 
   p {
-    margin-right: 100px;
     margin-top: 20px;
     margin-bottom: 20px;
     font-family: Heebo;
@@ -57,7 +33,7 @@ export const MainText = styled.div`
     font-weight: normal;
     font-size: 20px;
     line-height: 30px;
-    color: ${textSecundary};
+    color: ${colors.text.secondary};
   }
 `;
 
@@ -67,6 +43,7 @@ export const Title = styled.h1`
   font-weight: 600;
   font-size: 80px;
   line-height: 74px;
+  color: ${colors.text.primary};
 `;
 
 export const ImageContainer = styled.div`
@@ -80,15 +57,20 @@ export const ImageHeader = styled(Image)``;
 
 export const BtnHeader = styled.a`
   border-radius: 10px;
-  background-color: ${backgroundOrange};
+  background-color: ${colors.background.orange};
   font-family: Heebo;
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 26px;
-  color: ${textWhite};
+  color: ${colors.text.white};
   padding: 23px 26px;
   width: 300px;
   text-align: center;
   text-decoration: none;
+
+  &:hover {
+    transition: background 300ms;
+    background-color: ${lighten(0.1, colors.background.orange)};
+  }
 `;
