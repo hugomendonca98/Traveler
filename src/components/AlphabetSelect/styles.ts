@@ -1,7 +1,11 @@
 import { colors } from '@/styles/Colors';
 import styled from 'styled-components';
 
-export const SelectAlphabet = styled.select`
+interface SelectAlphabetProps {
+  isActive: boolean;
+}
+
+export const SelectAlphabet = styled.select<SelectAlphabetProps>`
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -13,10 +17,10 @@ export const SelectAlphabet = styled.select`
   outline: none;
   font-family: Roboto;
   font-style: normal;
-  font-weight: normal;
+  font-weight: bold;
   font-size: 16px;
   line-height: 26px;
-  color: ${colors.text.primary};
+  color: ${props => (props.isActive ? colors.text.primary : colors.text.gray)};
   cursor: pointer;
 
   &::-ms-expand {
@@ -26,4 +30,5 @@ export const SelectAlphabet = styled.select`
 
 export const OptionAlphabet = styled.option`
   text-align: center;
+  color: ${colors.text.primary};
 `;

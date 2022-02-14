@@ -5,15 +5,18 @@ import { OptionAlphabet, SelectAlphabet } from './styles';
 interface AlphabetSelectProps {
   selected: string;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
+  isActive: boolean;
 }
 
 export default function AlphabetSelect({
   selected,
   setSelected,
+  isActive,
 }: AlphabetSelectProps): JSX.Element {
   return (
     <>
       <SelectAlphabet
+        isActive={isActive}
         name="alphabet"
         defaultValue={selected}
         onChange={e => setSelected(e.target.value)}

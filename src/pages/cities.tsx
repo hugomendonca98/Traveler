@@ -6,7 +6,12 @@ import NavBar from '@/components/NavBar/NavBar';
 import {
   BackgroundCustom,
   Container,
+  FilterButton,
   FilterCities,
+  FilterContainer,
+  FilterHr,
+  HrContainer,
+  HrAll,
   Title,
 } from '@/styles/Cities';
 import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
@@ -14,6 +19,7 @@ import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
 export default function Cities(): JSX.Element {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState('');
+  const [filterController, setFilterController] = useState('All');
 
   return (
     <>
@@ -34,9 +40,34 @@ export default function Cities(): JSX.Element {
       <Container>
         <FilterCities>
           <Title>Selecione uma cidade</Title>
+          <FilterHr>
+            <FilterContainer>
+              <FilterButton
+                isActive={filterController === 'All'}
+                onClick={() => setFilterController('All')}
+              >
+                Todas
+              </FilterButton>
+              <FilterButton
+                isActive={filterController === 'Most'}
+                onClick={() => setFilterController('Most')}
+              >
+                Mais Acessadas
+              </FilterButton>
+              <FilterButton onClick={() => setFilterController('Alphabet')}>
+                <AlphabetSelect
+                  isActive={filterController === 'Alphabet'}
+                  selected={selected}
+                  setSelected={setSelected}
+                />
+              </FilterButton>
+            </FilterContainer>
+            <HrContainer>
+              <HrAll active={filterController} />
+            </HrContainer>
+          </FilterHr>
         </FilterCities>
       </Container>
-      <AlphabetSelect selected={selected} setSelected={setSelected} />
     </>
   );
 }
