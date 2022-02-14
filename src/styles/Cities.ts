@@ -106,3 +106,12 @@ export const Title = styled.h1`
   line-height: 46px;
   color: ${colors.text.primary};
 `;
+
+export const CitiesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  margin-bottom: 20px;
+`;

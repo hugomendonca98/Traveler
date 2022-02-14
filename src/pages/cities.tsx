@@ -13,8 +13,11 @@ import {
   HrContainer,
   HrAll,
   Title,
+  CitiesContainer,
 } from '@/styles/Cities';
 import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
+import CityCard from '@/components/CityCard/CityCard';
+import CityImage from '../../public/images/image15.png';
 
 export default function Cities(): JSX.Element {
   const [search, setSearch] = useState('');
@@ -67,6 +70,13 @@ export default function Cities(): JSX.Element {
             </HrContainer>
           </FilterHr>
         </FilterCities>
+        <CitiesContainer>
+          <CityCard
+            image={CityImage}
+            title="Águas Mornas"
+            description="13 locais"
+          />
+        </CitiesContainer>
       </Container>
     </>
   );
