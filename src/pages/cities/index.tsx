@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { GetServerSideProps } from 'next';
 
 import SEO from '@/components/SEO/SEO';
 import Search from '@/components/Search/Search';
@@ -17,9 +18,31 @@ import {
 } from '@/styles/Cities';
 import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
 import CityCard from '@/components/CityCard/CityCard';
-import CityImage from '../../public/images/image15.png';
 
-export default function Cities(): JSX.Element {
+import api from '@/services/api';
+import linkFormat from '@/utils/linkFormat';
+
+interface IPlace {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+}
+
+interface ICity {
+  id: string;
+  name: string;
+  description: string;
+
+  image_url: string;
+  place: IPlace[];
+}
+
+interface CitiesProps {
+  cities: ICity[];
+}
+
+export default function Cities({ cities }: CitiesProps): JSX.Element {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState('');
   const [filterController, setFilterController] = useState('All');
@@ -71,13 +94,31 @@ export default function Cities(): JSX.Element {
           </FilterHr>
         </FilterCities>
         <CitiesContainer>
-          <CityCard
-            image={CityImage}
-            title="Águas Mornas"
-            description="13 locais"
-          />
+          {cities.map(city => (
+            <CityCard
+              key={city.id}
+              linkTo={`/cities/${linkFormat(city.name)}`}
+              image={city.image_url}
+              title={city.name}
+              description={
+                city.place.length > 1
+                  ? `${String(city.place.length)} Locais`
+                  : `${String(city.place.length)} Local`
+              }
+            />
+          ))}
         </CitiesContainer>
       </Container>
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps<CitiesProps> = async () => {
+  const response = await api.get('/city');
+
+  return {
+    props: {
+      cities: response.data,
+    },
+  };
+};

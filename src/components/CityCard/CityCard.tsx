@@ -13,18 +13,20 @@ interface CityCardProps {
   image: string | StaticImageData;
   title: string;
   description: string;
+  linkTo: string;
 }
 
 export default function CityCard({
   image,
   title,
   description,
+  linkTo,
 }: CityCardProps): JSX.Element {
   return (
-    <Link href={'#'} passHref>
-      <a href="#">
+    <Link href={linkTo} passHref>
+      <a>
         <Card>
-          <CardImage src={image} alt={title} />
+          <CardImage width={254} height={175} src={image} alt={title} />
           <CardText>
             <CardTitle>{title}</CardTitle>
             <CardDescription>{description}</CardDescription>
