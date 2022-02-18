@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import styled from 'styled-components';
 
 import { colors } from './Colors';
@@ -115,4 +116,25 @@ export const CitiesContainer = styled.div`
   margin: auto;
   margin-top: 40px;
   margin-bottom: 20px;
+`;
+
+export const CitiesNotFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+`;
+
+export const NotFoundImage = styled(Image)``;
+
+export const NotFoundText = styled.p`
+  font-family: Heebo;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 34px;
+  text-align: center;
+  color: #617480;
+  margin-top: 10px;
 `;
