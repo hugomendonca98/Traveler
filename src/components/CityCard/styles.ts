@@ -1,7 +1,12 @@
 import Image from 'next/image';
+
 import styled from 'styled-components';
 
 import { colors } from '@/styles/Colors';
+
+export const LinkCard = styled.a`
+  margin: 10px 10px;
+`;
 
 export const Card = styled.div`
   width: 256px;
@@ -10,7 +15,6 @@ export const Card = styled.div`
   border: 1px solid #dce2e6;
   box-sizing: border-box;
   border-radius: 16px;
-  margin: 10px 10px;
 `;
 
 export const CardImage = styled(Image)`

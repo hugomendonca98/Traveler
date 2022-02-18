@@ -7,6 +7,7 @@ import {
   CardImage,
   CardText,
   CardTitle,
+  LinkCard,
 } from './styles';
 
 interface CityCardProps {
@@ -24,7 +25,7 @@ export default function CityCard({
 }: CityCardProps): JSX.Element {
   return (
     <Link href={linkTo} passHref>
-      <a>
+      <LinkCard>
         <Card>
           <CardImage width={254} height={175} src={image} alt={title} />
           <CardText>
@@ -32,7 +33,7 @@ export default function CityCard({
             <CardDescription>{description}</CardDescription>
           </CardText>
         </Card>
-      </a>
+      </LinkCard>
     </Link>
   );
 }

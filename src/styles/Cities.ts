@@ -109,9 +109,10 @@ export const Title = styled.h1`
 
 export const CitiesContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
+  margin: auto;
   margin-top: 40px;
   margin-bottom: 20px;
 `;

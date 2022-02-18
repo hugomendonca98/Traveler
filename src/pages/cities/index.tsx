@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import SEO from '@/components/SEO/SEO';
 import Search from '@/components/Search/Search';
 import NavBar from '@/components/NavBar/NavBar';
+import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
+import CityCard from '@/components/CityCard/CityCard';
+import api from '@/services/api';
 import {
   BackgroundCustom,
   Container,
@@ -16,11 +19,7 @@ import {
   Title,
   CitiesContainer,
 } from '@/styles/Cities';
-import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
-import CityCard from '@/components/CityCard/CityCard';
-
-import api from '@/services/api';
-import linkFormat from '@/utils/linkFormat';
+import textFormat from '@/utils/textFormat';
 
 interface IPlace {
   id: string;
@@ -46,6 +45,25 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState('');
   const [filterController, setFilterController] = useState('All');
+
+  const citiesRef = useRef(cities);
+
+  useEffect(() => {
+    if (
+      search.trim() !== '' ||
+      (filterController === 'Alphabet' && selected !== '')
+    ) {
+      citiesRef.current = cities
+        .filter(city => textFormat(city.name).startsWith(textFormat(selected)))
+        .filter(citySearch =>
+          textFormat(citySearch.name).includes(textFormat(search)),
+        );
+    } else if (filterController === 'All' || selected === '') {
+      citiesRef.current = cities.filter(citySearch =>
+        textFormat(citySearch.name).includes(textFormat(search)),
+      );
+    }
+  }, [cities, filterController, search, selected]);
 
   return (
     <>
@@ -94,10 +112,10 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
           </FilterHr>
         </FilterCities>
         <CitiesContainer>
-          {cities.map(city => (
+          {citiesRef.current.map(city => (
             <CityCard
               key={city.id}
-              linkTo={`/cities/${linkFormat(city.name)}`}
+              linkTo={`/cities/${city.id}`}
               image={city.image_url}
               title={city.name}
               description={

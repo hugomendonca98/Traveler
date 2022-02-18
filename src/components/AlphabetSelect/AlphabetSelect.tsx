@@ -21,7 +21,7 @@ export default function AlphabetSelect({
         defaultValue={selected}
         onChange={e => setSelected(e.target.value)}
       >
-        <OptionAlphabet>A - Z</OptionAlphabet>
+        <OptionAlphabet value="">A - Z</OptionAlphabet>
         <OptionAlphabet>A</OptionAlphabet>
         <OptionAlphabet>B</OptionAlphabet>
         <OptionAlphabet>C</OptionAlphabet>
