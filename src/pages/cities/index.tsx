@@ -46,24 +46,23 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
   const [selected, setSelected] = useState('');
   const [filterController, setFilterController] = useState('All');
 
-  const citiesRef = useRef(cities);
-
-  useEffect(() => {
+  const dataFilter = (): ICity[] => {
     if (
       search.trim() !== '' ||
       (filterController === 'Alphabet' && selected !== '')
     ) {
-      citiesRef.current = cities
+      return cities
         .filter(city => textFormat(city.name).startsWith(textFormat(selected)))
         .filter(citySearch =>
           textFormat(citySearch.name).includes(textFormat(search)),
         );
     } else if (filterController === 'All' || selected === '') {
-      citiesRef.current = cities.filter(citySearch =>
+      return cities.filter(citySearch =>
         textFormat(citySearch.name).includes(textFormat(search)),
       );
     }
-  }, [cities, filterController, search, selected]);
+    return [];
+  };
 
   return (
     <>
@@ -112,7 +111,7 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
           </FilterHr>
         </FilterCities>
         <CitiesContainer>
-          {citiesRef.current.map(city => (
+          {dataFilter().map(city => (
             <CityCard
               key={city.id}
               linkTo={`/cities/${city.id}`}
