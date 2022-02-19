@@ -5,7 +5,6 @@ import SEO from '@/components/SEO/SEO';
 import Header from '../../public/images/Header.png';
 import {
   BtnHeader,
-  Container,
   ImageContainer,
   ImageHeader,
   Main,
@@ -13,6 +12,7 @@ import {
   Title,
 } from '@/styles/Home';
 import NavBar from '@/components/NavBar/NavBar';
+import { Container } from '@/styles/GlobalStyles';
 
 const Home: NextPage = () => {
   return (

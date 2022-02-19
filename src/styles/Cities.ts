@@ -16,11 +16,6 @@ export const BackgroundCustom = styled.div`
   border-bottom: 1px solid ${colors.border.primary};
 `;
 
-export const Container = styled.div`
-  width: 1140px;
-  margin: auto;
-`;
-
 export const FilterCities = styled.div`
   display: flex;
   justify-content: space-between;
@@ -135,6 +130,6 @@ export const NotFoundText = styled.p`
   font-size: 24px;
   line-height: 34px;
   text-align: center;
-  color: #617480;
+  color: ${colors.text.secondary};
   margin-top: 10px;
 `;

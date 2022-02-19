@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { ReactNode } from 'react';
-import { Container, Nav, ToDashboardBtn } from './styles';
+import { Nav, ToDashboardBtn } from './styles';
 import Logo from '../../../public/images/Logo.png';
+import { Container } from '@/styles/GlobalStyles';
 
 interface NavBarProps {
   children?: ReactNode;

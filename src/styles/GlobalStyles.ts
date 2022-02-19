@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 import { colors } from './Colors';
 
@@ -22,4 +22,9 @@ export const GlobalStyles = createGlobalStyle`
     a {
       text-decoration: none;
     }
+`;
+
+export const Container = styled.div`
+  width: 1140px;
+  margin: auto;
 `;

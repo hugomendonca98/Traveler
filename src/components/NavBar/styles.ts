@@ -3,11 +3,6 @@ import { darken } from 'polished';
 
 import { colors } from '@/styles/Colors';
 
-export const Container = styled.div`
-  width: 1140px;
-  margin: auto;
-`;
-
 export const Nav = styled.nav`
   display: flex;
   justify-content: space-between;

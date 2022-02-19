@@ -10,7 +10,6 @@ import api from '@/services/api';
 import Emoji from '../../../public/images/Emoji.png';
 import {
   BackgroundCustom,
-  Container,
   FilterButton,
   FilterCities,
   FilterContainer,
@@ -24,6 +23,7 @@ import {
   NotFoundText,
 } from '@/styles/Cities';
 import textFormat from '@/utils/textFormat';
+import { Container } from '@/styles/GlobalStyles';
 
 interface IPlace {
   id: string;

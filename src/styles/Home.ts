@@ -4,11 +4,6 @@ import Image from 'next/image';
 
 import { colors } from './Colors';
 
-export const Container = styled.div`
-  width: 1140px;
-  margin: auto;
-`;
-
 export const Main = styled.main`
   display: flex;
   justify-content: space-between;
