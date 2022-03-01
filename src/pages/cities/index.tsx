@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import SEO from '@/components/SEO/SEO';
@@ -7,6 +7,8 @@ import NavBar from '@/components/NavBar/NavBar';
 import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
 import CityCard from '@/components/CityCard/CityCard';
 import api from '@/services/api';
+import textFormat from '@/utils/textFormat';
+import { Container } from '@/styles/GlobalStyles';
 import Emoji from '../../../public/images/Emoji.png';
 import {
   BackgroundCustom,
@@ -22,8 +24,6 @@ import {
   NotFoundImage,
   NotFoundText,
 } from '@/styles/Cities';
-import textFormat from '@/utils/textFormat';
-import { Container } from '@/styles/GlobalStyles';
 
 interface IPlace {
   id: string;
@@ -51,10 +51,7 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
   const [filterController, setFilterController] = useState('All');
 
   const dataFilter = (): ICity[] | [] => {
-    if (
-      search.trim() !== '' ||
-      (filterController === 'Alphabet' && selected !== '')
-    ) {
+    if (filterController === 'Alphabet' && selected !== '') {
       // Pesquisa com uma letra do alfabeto selecionada.
       return cities
         .filter(city => textFormat(city.name).startsWith(textFormat(selected)))
@@ -116,30 +113,31 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
             </HrContainer>
           </FilterHr>
         </FilterCities>
-
-        {dataFilter().length <= 0 ? (
-          <CitiesNotFound>
-            <NotFoundImage src={Emoji} />
-            <NotFoundText>Sem resultados. </NotFoundText>
-            <NotFoundText>Tente uma nova busca</NotFoundText>
-          </CitiesNotFound>
-        ) : (
-          <CitiesContainer>
-            {dataFilter().map(city => (
-              <CityCard
-                key={city.id}
-                linkTo={`/cities/${city.id}`}
-                image={city.image_url}
-                title={city.name}
-                description={
-                  city.place.length > 1
-                    ? `${String(city.place.length)} Locais`
-                    : `${String(city.place.length)} Local`
-                }
-              />
-            ))}
-          </CitiesContainer>
-        )}
+        <main>
+          {dataFilter().length <= 0 ? (
+            <CitiesNotFound>
+              <NotFoundImage src={Emoji} />
+              <NotFoundText>Sem resultados. </NotFoundText>
+              <NotFoundText>Tente uma nova busca</NotFoundText>
+            </CitiesNotFound>
+          ) : (
+            <CitiesContainer>
+              {dataFilter().map(city => (
+                <CityCard
+                  key={city.id}
+                  linkTo={`/cities/${city.id}`}
+                  image={city.image_url}
+                  title={city.name}
+                  description={
+                    city.place.length > 1
+                      ? `${String(city.place.length)} Locais`
+                      : `${String(city.place.length)} Local`
+                  }
+                />
+              ))}
+            </CitiesContainer>
+          )}
+        </main>
       </Container>
     </>
   );

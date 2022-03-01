@@ -11,9 +11,21 @@ import {
   CityNavegation,
   NavTitle,
   CityBanner,
+  CityInfoContainer,
+  CityText,
+  CityInfo,
+  CityCategory,
+  CategoryIcon,
+  CategoryInfo,
+  CategoryNumber,
+  CategoryName,
 } from '@/styles/City';
 
-import Banner from '../../../public/images/Banner4.jpg';
+import Banner from '../../../public/images/Banner.png';
+import PontosIcon from '../../../public/images/Pontos.png';
+import ComidaIcon from '../../../public/images/Comidas.png';
+import EventosIcon from '../../../public/images/Eventos.png';
+import { Container } from '@/styles/GlobalStyles';
 
 export default function City(): JSX.Element {
   const router = useRouter();
@@ -43,6 +55,56 @@ export default function City(): JSX.Element {
           objectPosition="center"
         />
       </CityBanner>
+      <main>
+        <Container>
+          <CityInfoContainer>
+            <CityText>
+              <h1>Florianópolis</h1>
+              <h3>
+                Capital do estado de Santa Catarina no sul do Brasil, é
+                maioritariamente constituída pela Ilha de Santa Catarina, com 54
+                km de comprimento.
+              </h3>
+              <p>
+                É famosa pelas suas praias, incluindo estâncias turísticas
+                populares como a Praia dos Ingleses na extremidade norte da
+                ilha.
+              </p>
+            </CityText>
+            <CityInfo>
+              <CityCategory>
+                <CategoryIcon>
+                  <Image width={40} height={40} src={PontosIcon} alt="" />
+                </CategoryIcon>
+                <CategoryInfo>
+                  <CategoryNumber>60</CategoryNumber>
+                  <CategoryName>Pontos Turísticos</CategoryName>
+                </CategoryInfo>
+              </CityCategory>
+
+              <CityCategory>
+                <CategoryIcon>
+                  <Image width={40} height={40} src={ComidaIcon} alt="" />
+                </CategoryIcon>
+                <CategoryInfo>
+                  <CategoryNumber>20</CategoryNumber>
+                  <CategoryName>Comida e Bebida</CategoryName>
+                </CategoryInfo>
+              </CityCategory>
+
+              <CityCategory>
+                <CategoryIcon>
+                  <Image width={40} height={40} src={EventosIcon} alt="" />
+                </CategoryIcon>
+                <CategoryInfo>
+                  <CategoryNumber>11</CategoryNumber>
+                  <CategoryName>Eventos Organizados</CategoryName>
+                </CategoryInfo>
+              </CityCategory>
+            </CityInfo>
+          </CityInfoContainer>
+        </Container>
+      </main>
     </>
   );
 }

@@ -1,3 +1,4 @@
+// Formatando texto para tirar acentos, espaços e caixa alta.
 const textFormat = (text: string): string => {
   return text
     .normalize('NFD')

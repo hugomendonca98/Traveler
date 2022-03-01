@@ -6,31 +6,6 @@ import { colors } from '@/styles/Colors';
 
 export const LinkCard = styled.a`
   margin: 10px 10px;
-
-  -webkit-animation: scale-up-center 0.3s cubic-bezier(0.39, 0.575, 0.565, 1)
-    both;
-  animation: scale-up-center 0.3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-
-  @-webkit-keyframes scale-up-center {
-    0% {
-      -webkit-transform: scale(0.7);
-      transform: scale(0.7);
-    }
-    100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-  }
-  @keyframes scale-up-center {
-    0% {
-      -webkit-transform: scale(0.7);
-      transform: scale(0.7);
-    }
-    100% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
-  }
 `;
 
 export const Card = styled.div`
