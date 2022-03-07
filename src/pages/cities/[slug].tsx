@@ -25,7 +25,9 @@ import Banner from '../../../public/images/Banner.png';
 import PontosIcon from '../../../public/images/Pontos.png';
 import ComidaIcon from '../../../public/images/Comidas.png';
 import EventosIcon from '../../../public/images/Eventos.png';
+import ImgageCard from '../../../public/images/Image.png';
 import { Container } from '@/styles/GlobalStyles';
+import PlaceCard from '@/components/PlaceCard/PlaceCard';
 
 export default function City(): JSX.Element {
   const router = useRouter();
@@ -103,6 +105,15 @@ export default function City(): JSX.Element {
               </CityCategory>
             </CityInfo>
           </CityInfoContainer>
+
+          <PlaceCard
+            image={ImgageCard}
+            title="Doce & Companhia"
+            category="Comida e Bebida"
+            categoryIcon={ComidaIcon}
+            favoriteNote="4,5"
+            linkTo="#"
+          />
         </Container>
       </main>
     </>

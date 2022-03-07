@@ -15,7 +15,6 @@ interface CityCardProps {
   title: string;
   description: string;
   linkTo: string;
-  isPlace?: boolean;
 }
 
 export default function CityCard({
@@ -23,7 +22,6 @@ export default function CityCard({
   title,
   description,
   linkTo,
-  isPlace,
 }: CityCardProps): JSX.Element {
   return (
     <Link href={linkTo} passHref>
