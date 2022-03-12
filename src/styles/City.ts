@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { darken } from 'polished';
 import styled from 'styled-components';
 import { colors } from './Colors';
@@ -123,4 +124,81 @@ export const CategoryName = styled.p`
   color: #617480;
   margin-top: 16px;
   margin-left: 32px;
+`;
+
+export const PlacesTitle = styled.h2`
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 46px;
+  color: #123952;
+  margin-top: 120px;
+`;
+
+export const PlacesContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+`;
+
+export const PlacesHighlights = styled.div`
+  height: 286px;
+  background: #ffffff;
+  border: 1px solid #dce2e6;
+  box-sizing: border-box;
+  border-radius: 16px;
+  margin-top: 80px;
+  margin-bottom: 80px;
+  display: flex;
+`;
+
+export const PlacesHighlightsInfosContainer = styled.div`
+  margin: 50px;
+  width: 50%;
+`;
+
+export const PlacesHighlightsIcon = styled.div`
+  width: 119px;
+  height: 32px;
+  background: #f25d27;
+  border-radius: 100px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const PlacesHighlightsIconText = styled.p`
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #ffffff;
+  margin-left: 5px;
+`;
+
+export const PlacesHighlightsTitle = styled.h3`
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 36px;
+  color: #123952;
+  margin-top: 40px;
+`;
+
+export const PlacesHighlightsDescription = styled.p`
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #617480;
+  margin-top: 16px;
+`;
+
+export const PlacesHighlightsImage = styled(Image)`
+  border-radius: 0px 16px 16px 0px;
 `;

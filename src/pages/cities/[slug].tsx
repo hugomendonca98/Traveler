@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BiArrowBack } from 'react-icons/bi';
+import { IoAlertCircleOutline } from 'react-icons/io5';
 
 import NavBar from '@/components/NavBar/NavBar';
 import {
@@ -19,6 +20,15 @@ import {
   CategoryInfo,
   CategoryNumber,
   CategoryName,
+  PlacesTitle,
+  PlacesContainer,
+  PlacesHighlights,
+  PlacesHighlightsIcon,
+  PlacesHighlightsIconText,
+  PlacesHighlightsTitle,
+  PlacesHighlightsDescription,
+  PlacesHighlightsInfosContainer,
+  PlacesHighlightsImage,
 } from '@/styles/City';
 
 import Banner from '../../../public/images/Banner.png';
@@ -26,6 +36,7 @@ import PontosIcon from '../../../public/images/Pontos.png';
 import ComidaIcon from '../../../public/images/Comidas.png';
 import EventosIcon from '../../../public/images/Eventos.png';
 import ImgageCard from '../../../public/images/Image.png';
+import DestaqueImage from '../../../public/images/Destaque.png';
 import { Container } from '@/styles/GlobalStyles';
 import PlaceCard from '@/components/PlaceCard/PlaceCard';
 
@@ -105,15 +116,56 @@ export default function City(): JSX.Element {
               </CityCategory>
             </CityInfo>
           </CityInfoContainer>
-
-          <PlaceCard
-            image={ImgageCard}
-            title="Doce & Companhia"
-            category="Comida e Bebida"
-            categoryIcon={ComidaIcon}
-            favoriteNote="4,5"
-            linkTo="#"
-          />
+          <PlacesTitle>Top avaliados</PlacesTitle>
+          <PlacesContainer>
+            <PlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+            <PlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+            <PlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+            <PlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+          </PlacesContainer>
+          <PlacesHighlights>
+            <PlacesHighlightsInfosContainer>
+              <PlacesHighlightsIcon>
+                <IoAlertCircleOutline size={25} color="#fff" />
+                <PlacesHighlightsIconText>Destaque</PlacesHighlightsIconText>
+              </PlacesHighlightsIcon>
+              <PlacesHighlightsTitle>Praia dos Ingleses</PlacesHighlightsTitle>
+              <PlacesHighlightsDescription>
+                Uma parte do paraíso na terra. Frequentemente com águas claras
+                em tons verdes e azuis. Um dos locais mais preferidos por
+                turistas e viajantes.
+              </PlacesHighlightsDescription>
+            </PlacesHighlightsInfosContainer>
+            <PlacesHighlightsImage src={DestaqueImage} alt="" />
+          </PlacesHighlights>
         </Container>
       </main>
     </>
