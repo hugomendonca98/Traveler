@@ -16,7 +16,6 @@ import {
   FilterCities,
   FilterContainer,
   FilterHr,
-  HrContainer,
   HrAll,
   Title,
   CitiesContainer,
@@ -100,17 +99,18 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
               >
                 Mais Acessadas
               </FilterButton>
-              <FilterButton onClick={() => setFilterController('Alphabet')}>
+              <FilterButton
+                isActive={filterController === 'Alphabet'}
+                onClick={() => setFilterController('Alphabet')}
+              >
                 <AlphabetSelect
                   isActive={filterController === 'Alphabet'}
                   selected={selected}
                   setSelected={setSelected}
                 />
               </FilterButton>
-            </FilterContainer>
-            <HrContainer>
               <HrAll active={filterController} />
-            </HrContainer>
+            </FilterContainer>
           </FilterHr>
         </FilterCities>
         <main>

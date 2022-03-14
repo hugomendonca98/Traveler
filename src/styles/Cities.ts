@@ -23,9 +23,11 @@ export const FilterCities = styled.div`
 `;
 
 export const FilterContainer = styled.div`
+  position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 274px;
 `;
 
 export const FilterHr = styled.div`
@@ -42,56 +44,22 @@ export const FilterButton = styled.button<BtnProps>`
   font-weight: bold;
   font-size: 16px;
   line-height: 26px;
+  text-align: center;
   color: ${props => (props.isActive ? colors.text.primary : colors.text.gray)};
-
+  ${props => props.isActive && `border-bottom: 2px solid #f25d27;`}
   cursor: pointer;
-  margin-right: 20px;
-  margin-left: 20px;
-`;
-
-export const HrContainer = styled.div`
-  display: flex;
-  align-items: center;
+  z-index: 10000;
 `;
 
 export const HrAll = styled.hr<HrProps>`
   border: 0;
   height: 2px;
-  width: 290px;
+  width: 100%;
   margin-right: 15px;
+  background-color: #dce2e6;
   transition: background 300ms;
-
-  ${props =>
-    props.active === 'All' &&
-    `background: rgb(242,93,39);
-      background: linear-gradient(
-        90deg, rgba(242,93,39,1) 16%,
-        rgba(220,226,230,1) 16%,
-        rgba(220,226,230,1) 70%,
-        rgba(220,226,230,1) 80%);`}
-
-  ${props =>
-    props.active === 'Most' &&
-    `background: rgb(220, 226, 230);
-  background: linear-gradient(
-    90deg,
-    rgba(220, 226, 230, 1) 25%,
-    rgba(220, 226, 230, 1) 25%,
-    rgba(242, 93, 39, 1) 25%,
-    rgba(242, 93, 39, 1) 73%,
-    rgba(220, 226, 230, 1) 73%
-  );`}
-
-  ${props =>
-    props.active === 'Alphabet' &&
-    `background: rgb(220, 226, 230);
-  background: linear-gradient(
-    90deg,
-    rgba(220, 226, 230, 1) 73%,
-    rgba(220, 226, 230, 1) 75%,
-    rgba(220, 226, 230, 1) 80%,
-    rgba(242, 93, 39, 1) 80%
-  );`}
+  position: absolute;
+  bottom: 0px;
 `;
 
 export const Title = styled.h1`
