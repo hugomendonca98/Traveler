@@ -28,18 +28,18 @@ export const CityNavegation = styled.div`
       transition: background 300ms;
       background-color: ${darken(0.07, colors.background.white)};
     }
+  }
 
-    div {
-      margin-left: 40%;
+  div {
+    margin-left: 40%;
 
-      h3 {
-        font-family: Barlow;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 20px;
-        line-height: 30px;
-        color: ${colors.text.gray};
-      }
+    h3 {
+      font-family: Barlow;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 30px;
+      color: ${colors.text.gray};
     }
   }
 `;
