@@ -9,7 +9,7 @@ interface SEOProps {
   shouldIndexPage?: boolean;
 }
 
-export default function SEO({
+export default function MySEO({
   title,
   description,
   image,

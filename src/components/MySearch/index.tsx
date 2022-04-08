@@ -11,7 +11,7 @@ interface SearchProps {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function Search({
+export default function MySearch({
   placeholder,
   search,
   setSearch,

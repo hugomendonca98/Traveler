@@ -1,28 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 
-import SEO from '@/components/SEO/SEO';
-import Search from '@/components/Search/Search';
-import NavBar from '@/components/NavBar/NavBar';
-import AlphabetSelect from '@/components/AlphabetSelect/AlphabetSelect';
-import CityCard from '@/components/CityCard/CityCard';
+import MySEO from '@/components/MySEO';
+import MySearch from '@/components/MySearch';
+import MyNavBar from '@/components/MyNavBar';
+import MyAlphabetSelect from '@/components/MyAlphabetSelect';
+import MyCityCard from '@/components/MyCityCard';
 import api from '@/services/api';
 import textFormat from '@/utils/textFormat';
 import { Container } from '@/styles/GlobalStyles';
-import Emoji from '../../../public/images/Emoji.png';
 import {
-  BackgroundCustom,
+  Background,
   FilterButton,
   FilterCities,
-  FilterContainer,
-  FilterHr,
   HrAll,
-  Title,
   CitiesContainer,
   CitiesNotFound,
-  NotFoundImage,
-  NotFoundText,
 } from '@/styles/Cities';
+import Emoji from '../../../public/images/Emoji.png';
+import Image from 'next/image';
 
 interface IPlace {
   id: string;
@@ -68,25 +64,25 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
 
   return (
     <>
-      <SEO
+      <MySEO
         title="Descubra locais incríveis"
         description="Descubra locais incriveis para se visitar em cidades maravilhosas de todo o brasil."
         image="Logo.png"
       />
-      <BackgroundCustom>
-        <NavBar>
-          <Search
+      <Background>
+        <MyNavBar>
+          <MySearch
             placeholder="Qual cidade você procura?"
             search={search}
             setSearch={setSearch}
           />
-        </NavBar>
-      </BackgroundCustom>
+        </MyNavBar>
+      </Background>
       <Container>
         <FilterCities>
-          <Title>Selecione uma cidade</Title>
-          <FilterHr>
-            <FilterContainer>
+          <h1>Selecione uma cidade</h1>
+          <div className="filter-hr">
+            <div className="filter-container">
               <FilterButton
                 isActive={filterController === 'All'}
                 onClick={() => setFilterController('All')}
@@ -103,27 +99,27 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
                 isActive={filterController === 'Alphabet'}
                 onClick={() => setFilterController('Alphabet')}
               >
-                <AlphabetSelect
+                <MyAlphabetSelect
                   isActive={filterController === 'Alphabet'}
                   selected={selected}
                   setSelected={setSelected}
                 />
               </FilterButton>
               <HrAll active={filterController} />
-            </FilterContainer>
-          </FilterHr>
+            </div>
+          </div>
         </FilterCities>
         <main>
           {dataFilter().length <= 0 ? (
             <CitiesNotFound>
-              <NotFoundImage src={Emoji} />
-              <NotFoundText>Sem resultados. </NotFoundText>
-              <NotFoundText>Tente uma nova busca</NotFoundText>
+              <Image src={Emoji} alt="Nenhuma cidade encontrada." />
+              <p>Sem resultados. </p>
+              <p>Tente uma nova busca</p>
             </CitiesNotFound>
           ) : (
             <CitiesContainer>
               {dataFilter().map(city => (
-                <CityCard
+                <MyCityCard
                   key={city.id}
                   linkTo={`/cities/${city.id}`}
                   image={city.image_url}

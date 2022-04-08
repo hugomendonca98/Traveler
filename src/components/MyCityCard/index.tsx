@@ -17,7 +17,7 @@ interface CityCardProps {
   linkTo: string;
 }
 
-export default function CityCard({
+export default function MyCityCard({
   image,
   title,
   description,

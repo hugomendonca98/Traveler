@@ -5,30 +5,16 @@ import Image from 'next/image';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 
-import NavBar from '@/components/NavBar/NavBar';
+import MyNavBar from '@/components/MyNavBar';
 import {
-  BackButton,
-  BackgroundCustom,
+  Background,
   CityNavegation,
-  NavTitle,
   CityBanner,
   CityInfoContainer,
-  CityText,
   CityInfo,
-  CityCategory,
-  CategoryIcon,
-  CategoryInfo,
-  CategoryNumber,
-  CategoryName,
   PlacesTitle,
   PlacesContainer,
   PlacesHighlights,
-  PlacesHighlightsIcon,
-  PlacesHighlightsIconText,
-  PlacesHighlightsTitle,
-  PlacesHighlightsDescription,
-  PlacesHighlightsInfosContainer,
-  PlacesHighlightsImage,
 } from '@/styles/City';
 
 import Banner from '../../../public/images/Banner.png';
@@ -38,27 +24,27 @@ import EventosIcon from '../../../public/images/Eventos.png';
 import ImgageCard from '../../../public/images/Image.png';
 import DestaqueImage from '../../../public/images/Destaque.png';
 import { Container } from '@/styles/GlobalStyles';
-import PlaceCard from '@/components/PlaceCard/PlaceCard';
+import MyPlaceCard from '@/components/MyPlaceCard';
 
 export default function City(): JSX.Element {
   const router = useRouter();
 
   return (
     <>
-      <BackgroundCustom>
-        <NavBar>
+      <Background>
+        <MyNavBar>
           <CityNavegation>
             <Link href={'/cities'} passHref>
-              <BackButton>
+              <a className="go-back">
                 <BiArrowBack size={20} />
-              </BackButton>
+              </a>
             </Link>
-            <div style={{ marginLeft: '40%' }}>
-              <NavTitle>Cidade</NavTitle>
+            <div>
+              <h3>Cidade</h3>
             </div>
           </CityNavegation>
-        </NavBar>
-      </BackgroundCustom>
+        </MyNavBar>
+      </Background>
       <CityBanner>
         <Image
           src={Banner}
@@ -66,12 +52,13 @@ export default function City(): JSX.Element {
           alt=""
           objectFit="cover"
           objectPosition="center"
+          priority
         />
       </CityBanner>
       <main>
         <Container>
           <CityInfoContainer>
-            <CityText>
+            <div className="text-container">
               <h1>Florianópolis</h1>
               <h3>
                 Capital do estado de Santa Catarina no sul do Brasil, é
@@ -83,42 +70,42 @@ export default function City(): JSX.Element {
                 populares como a Praia dos Ingleses na extremidade norte da
                 ilha.
               </p>
-            </CityText>
+            </div>
             <CityInfo>
-              <CityCategory>
-                <CategoryIcon>
+              <div className="category">
+                <div className="icon">
                   <Image width={40} height={40} src={PontosIcon} alt="" />
-                </CategoryIcon>
-                <CategoryInfo>
-                  <CategoryNumber>60</CategoryNumber>
-                  <CategoryName>Pontos Turísticos</CategoryName>
-                </CategoryInfo>
-              </CityCategory>
+                </div>
+                <div className="info">
+                  <p className="category-number">60</p>
+                  <p className="category-name">Pontos Turísticos</p>
+                </div>
+              </div>
 
-              <CityCategory>
-                <CategoryIcon>
+              <div className="category">
+                <div className="icon">
                   <Image width={40} height={40} src={ComidaIcon} alt="" />
-                </CategoryIcon>
-                <CategoryInfo>
-                  <CategoryNumber>20</CategoryNumber>
-                  <CategoryName>Comida e Bebida</CategoryName>
-                </CategoryInfo>
-              </CityCategory>
+                </div>
+                <div className="info">
+                  <p className="category-number">20</p>
+                  <p className="category-name">Comida e Bebida</p>
+                </div>
+              </div>
 
-              <CityCategory>
-                <CategoryIcon>
+              <div className="category">
+                <div className="icon">
                   <Image width={40} height={40} src={EventosIcon} alt="" />
-                </CategoryIcon>
-                <CategoryInfo>
-                  <CategoryNumber>11</CategoryNumber>
-                  <CategoryName>Eventos Organizados</CategoryName>
-                </CategoryInfo>
-              </CityCategory>
+                </div>
+                <div className="info">
+                  <p className="category-number">11</p>
+                  <p className="category-name">Eventos Organizados</p>
+                </div>
+              </div>
             </CityInfo>
           </CityInfoContainer>
           <PlacesTitle>Top avaliados</PlacesTitle>
           <PlacesContainer>
-            <PlaceCard
+            <MyPlaceCard
               image={ImgageCard}
               title="Doce & Companhia"
               category="Comida e Bebida"
@@ -126,7 +113,7 @@ export default function City(): JSX.Element {
               favoriteNote="4,5"
               linkTo="#"
             />
-            <PlaceCard
+            <MyPlaceCard
               image={ImgageCard}
               title="Doce & Companhia"
               category="Comida e Bebida"
@@ -134,7 +121,7 @@ export default function City(): JSX.Element {
               favoriteNote="4,5"
               linkTo="#"
             />
-            <PlaceCard
+            <MyPlaceCard
               image={ImgageCard}
               title="Doce & Companhia"
               category="Comida e Bebida"
@@ -142,7 +129,7 @@ export default function City(): JSX.Element {
               favoriteNote="4,5"
               linkTo="#"
             />
-            <PlaceCard
+            <MyPlaceCard
               image={ImgageCard}
               title="Doce & Companhia"
               category="Comida e Bebida"
@@ -152,19 +139,19 @@ export default function City(): JSX.Element {
             />
           </PlacesContainer>
           <PlacesHighlights>
-            <PlacesHighlightsInfosContainer>
-              <PlacesHighlightsIcon>
+            <div className="info-container">
+              <div className="place-icon">
                 <IoAlertCircleOutline size={25} color="#fff" />
-                <PlacesHighlightsIconText>Destaque</PlacesHighlightsIconText>
-              </PlacesHighlightsIcon>
-              <PlacesHighlightsTitle>Praia dos Ingleses</PlacesHighlightsTitle>
-              <PlacesHighlightsDescription>
+                <div className="place-icon-text">Destaque</div>
+              </div>
+              <h3 className="place-title">Praia dos Ingleses</h3>
+              <p className="place-description">
                 Uma parte do paraíso na terra. Frequentemente com águas claras
                 em tons verdes e azuis. Um dos locais mais preferidos por
                 turistas e viajantes.
-              </PlacesHighlightsDescription>
-            </PlacesHighlightsInfosContainer>
-            <PlacesHighlightsImage src={DestaqueImage} alt="" />
+              </p>
+            </div>
+            <Image className="place-image" src={DestaqueImage} alt="" />
           </PlacesHighlights>
         </Container>
       </main>

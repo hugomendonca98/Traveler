@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styled from 'styled-components';
 
 import { colors } from './Colors';
@@ -11,7 +10,7 @@ interface BtnProps {
   isActive?: boolean;
 }
 
-export const BackgroundCustom = styled.div`
+export const Background = styled.div`
   background-color: ${colors.background.white};
   border-bottom: 1px solid ${colors.border.primary};
 `;
@@ -20,21 +19,30 @@ export const FilterCities = styled.div`
   display: flex;
   justify-content: space-between;
   padding-top: 40px;
-`;
 
-export const FilterContainer = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 274px;
-`;
+  h1 {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46px;
+    color: ${colors.text.primary};
+  }
 
-export const FilterHr = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  div.filter-hr {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    div.filter-container {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 274px;
+    }
+  }
 `;
 
 export const FilterButton = styled.button<BtnProps>`
@@ -46,7 +54,8 @@ export const FilterButton = styled.button<BtnProps>`
   line-height: 26px;
   text-align: center;
   color: ${props => (props.isActive ? colors.text.primary : colors.text.gray)};
-  ${props => props.isActive && `border-bottom: 2px solid #f25d27;`}
+  ${props =>
+    props.isActive && `border-bottom: 2px solid ${colors.background.orange};`}
   cursor: pointer;
   z-index: 10000;
 `;
@@ -60,15 +69,6 @@ export const HrAll = styled.hr<HrProps>`
   transition: background 300ms;
   position: absolute;
   bottom: 0px;
-`;
-
-export const Title = styled.h1`
-  font-family: Barlow;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 36px;
-  line-height: 46px;
-  color: ${colors.text.primary};
 `;
 
 export const CitiesContainer = styled.div`
@@ -87,17 +87,15 @@ export const CitiesNotFound = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 100px;
-`;
 
-export const NotFoundImage = styled(Image)``;
-
-export const NotFoundText = styled.p`
-  font-family: Heebo;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 34px;
-  text-align: center;
-  color: ${colors.text.secondary};
-  margin-top: 10px;
+  p {
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    color: ${colors.text.secondary};
+    margin-top: 10px;
+  }
 `;

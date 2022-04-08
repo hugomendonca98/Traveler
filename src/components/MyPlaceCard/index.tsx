@@ -26,7 +26,7 @@ interface PlaceCardProps {
   linkTo: string;
 }
 
-export default function PlaceCard({
+export default function MyPlaceCard({
   image,
   title,
   category,

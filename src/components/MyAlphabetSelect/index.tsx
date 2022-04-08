@@ -8,7 +8,7 @@ interface AlphabetSelectProps {
   isActive: boolean;
 }
 
-export default function AlphabetSelect({
+export default function MyAlphabetSelect({
   selected,
   setSelected,
   isActive,

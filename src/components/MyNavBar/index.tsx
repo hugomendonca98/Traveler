@@ -9,7 +9,7 @@ interface NavBarProps {
   children?: ReactNode;
 }
 
-export default function NavBar({ children }: NavBarProps): JSX.Element {
+export default function MyNavBar({ children }: NavBarProps): JSX.Element {
   return (
     <Container>
       <Nav>
