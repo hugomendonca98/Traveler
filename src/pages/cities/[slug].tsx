@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BiArrowBack } from 'react-icons/bi';
@@ -15,6 +14,10 @@ import {
   PlacesTitle,
   PlacesContainer,
   PlacesHighlights,
+  FilterButton,
+  HrAll,
+  PlacesMenu,
+  FilterPlaces,
 } from '@/styles/City';
 
 import Banner from '../../../public/images/Banner.png';
@@ -26,8 +29,24 @@ import DestaqueImage from '../../../public/images/Destaque.png';
 import { Container } from '@/styles/GlobalStyles';
 import MyPlaceCard from '@/components/MyPlaceCard';
 
-export default function City(): JSX.Element {
-  const router = useRouter();
+interface IPlace {
+  id: string;
+  name: string;
+  image: string;
+  description: string;
+}
+
+interface CitiesProps {
+  places: IPlace[];
+}
+
+export default function City({ places }: CitiesProps): JSX.Element {
+  const [filterController, setFilterController] = useState('All');
+
+  const dataFilter = (): IPlace[] | [] => {
+    // Realizar buscar de acordo com o filtro selecionado.
+    return [];
+  };
 
   return (
     <>
@@ -153,6 +172,75 @@ export default function City(): JSX.Element {
             </div>
             <Image className="place-image" src={DestaqueImage} alt="" />
           </PlacesHighlights>
+          <PlacesMenu>
+            <h1>Conheça Todos</h1>
+            <FilterPlaces>
+              <div className="filter-hr">
+                <div className="filter-container">
+                  <FilterButton
+                    isActive={filterController === 'All'}
+                    onClick={() => setFilterController('All')}
+                  >
+                    Todos
+                  </FilterButton>
+                  <FilterButton
+                    isActive={filterController === 'Poits'}
+                    onClick={() => setFilterController('Poits')}
+                  >
+                    Pontos Turísticos
+                  </FilterButton>
+
+                  <FilterButton
+                    isActive={filterController === 'Foods'}
+                    onClick={() => setFilterController('Foods')}
+                  >
+                    Comida & Bebida
+                  </FilterButton>
+                  <FilterButton
+                    isActive={filterController === 'Events'}
+                    onClick={() => setFilterController('Events')}
+                  >
+                    Eventos Organizados
+                  </FilterButton>
+                  <HrAll active={filterController} />
+                </div>
+              </div>
+            </FilterPlaces>
+          </PlacesMenu>
+          <PlacesContainer>
+            <MyPlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+            <MyPlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+            <MyPlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+            <MyPlaceCard
+              image={ImgageCard}
+              title="Doce & Companhia"
+              category="Comida e Bebida"
+              categoryIcon={ComidaIcon}
+              favoriteNote="4,5"
+              linkTo="#"
+            />
+          </PlacesContainer>
         </Container>
       </main>
     </>

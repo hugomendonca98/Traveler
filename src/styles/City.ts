@@ -3,6 +3,14 @@ import { darken } from 'polished';
 import styled from 'styled-components';
 import { colors } from './Colors';
 
+interface HrProps {
+  active: string;
+}
+
+interface BtnProps {
+  isActive?: boolean;
+}
+
 export const Background = styled.div`
   background-color: ${colors.background.white};
 `;
@@ -94,14 +102,14 @@ export const CityInfo = styled.div`
   div.category {
     width: 140px;
     height: 256px;
-    background: #ffffff;
-    border: 1px solid #dce2e6;
+    background: ${colors.background.white};
+    border: 1px solid ${colors.border.primary};
     border-radius: 20px;
     margin-left: 16px;
 
     div.icon {
       padding: 32px;
-      border-bottom: 1px solid #dce2e6;
+      border-bottom: 1px solid ${colors.border.primary};
     }
 
     div.info {
@@ -111,7 +119,7 @@ export const CityInfo = styled.div`
         font-weight: 600;
         font-size: 40px;
         line-height: 40px;
-        color: #123952;
+        color: ${colors.text.primary};
         margin-top: 30px;
         margin-left: 32px;
       }
@@ -122,7 +130,7 @@ export const CityInfo = styled.div`
         font-weight: normal;
         font-size: 16px;
         line-height: 22px;
-        color: #617480;
+        color: ${colors.text.secondary};
         margin-top: 16px;
         margin-left: 32px;
       }
@@ -136,7 +144,7 @@ export const PlacesTitle = styled.h2`
   font-weight: 600;
   font-size: 36px;
   line-height: 46px;
-  color: #123952;
+  color: ${colors.text.primary};
   margin-top: 120px;
 `;
 
@@ -144,12 +152,13 @@ export const PlacesContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 40px;
+  margin-bottom: 20px;
 `;
 
 export const PlacesHighlights = styled.div`
   height: 286px;
-  background: #ffffff;
-  border: 1px solid #dce2e6;
+  background: ${colors.background.white};
+  border: 1px solid ${colors.border.primary};
   box-sizing: border-box;
   border-radius: 16px;
   margin-top: 80px;
@@ -163,9 +172,9 @@ export const PlacesHighlights = styled.div`
     div.place-icon {
       width: 119px;
       height: 32px;
-      background: #f25d27;
+      background: ${colors.background.orange};
       border-radius: 100px;
-      color: white;
+      color: ${colors.text.white};
       display: flex;
       align-items: center;
       justify-content: center;
@@ -175,7 +184,7 @@ export const PlacesHighlights = styled.div`
         font-weight: 600;
         font-size: 14px;
         line-height: 17px;
-        color: #ffffff;
+        color: ${colors.text.white};
         margin-left: 5px;
       }
     }
@@ -185,7 +194,7 @@ export const PlacesHighlights = styled.div`
       font-weight: 600;
       font-size: 36px;
       line-height: 36px;
-      color: #123952;
+      color: ${colors.text.primary};
       margin-top: 40px;
     }
     p.place-description {
@@ -194,7 +203,7 @@ export const PlacesHighlights = styled.div`
       font-weight: 400;
       font-size: 16px;
       line-height: 26px;
-      color: #617480;
+      color: ${colors.text.secondary};
       margin-top: 16px;
     }
   }
@@ -202,4 +211,75 @@ export const PlacesHighlights = styled.div`
   img.place-image {
     border-radius: 0px 16px 16px 0px;
   }
+`;
+
+export const PlacesMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h1 {
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46px;
+    color: ${colors.text.primary};
+  }
+`;
+
+export const FilterPlaces = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 46px;
+    color: ${colors.text.primary};
+  }
+
+  div.filter-hr {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    div.filter-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+`;
+
+export const FilterButton = styled.button<BtnProps>`
+  background-color: transparent;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: ${props => (props.isActive ? colors.text.primary : colors.text.gray)};
+  ${props =>
+    props.isActive && `border-bottom: 2px solid ${colors.background.orange};`}
+  cursor: pointer;
+  z-index: 10000;
+  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+export const HrAll = styled.hr<HrProps>`
+  border: 0;
+  height: 2px;
+  width: 100%;
+  background-color: ${colors.border.primary};
+  transition: background 300ms;
+  position: absolute;
+  bottom: 0px;
+  margin: auto;
 `;
