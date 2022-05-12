@@ -19,6 +19,7 @@ import {
 } from '@/styles/Cities';
 import Emoji from '../../../public/images/Emoji.png';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 interface IPlace {
   id: string;
@@ -45,6 +46,8 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
   const [selected, setSelected] = useState('');
   const [filterController, setFilterController] = useState('All');
 
+  const router = useRouter();
+
   const dataFilter = (): ICity[] | [] => {
     if (filterController === 'Alphabet' && selected !== '') {
       // Pesquisa com uma letra do alfabeto selecionada.
@@ -61,6 +64,10 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
     }
     return [];
   };
+
+  if (router.isFallback) {
+    return <></>;
+  }
 
   return (
     <>

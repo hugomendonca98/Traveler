@@ -22,6 +22,10 @@ export const GlobalStyles = createGlobalStyle`
     a {
       text-decoration: none;
     }
+
+    .bar-of-progress {
+      z-index: 50;
+    }
 `;
 
 export const Container = styled.div`

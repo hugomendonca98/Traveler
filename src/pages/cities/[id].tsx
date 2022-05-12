@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
+import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+
+import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 
 import MyNavBar from '@/components/MyNavBar';
+import MyPlaceCard from '@/components/MyPlaceCard';
+import MySEO from '@/components/MySEO';
+import { Container } from '@/styles/GlobalStyles';
+import api from '@/services/api';
+
+import PontosIcon from '../../../public/images/Pontos.png';
+import ComidaIcon from '../../../public/images/Comidas.png';
+import EventosIcon from '../../../public/images/Eventos.png';
+import ImgageCard from '../../../public/images/Image.png';
+import DestaqueImage from '../../../public/images/Destaque.png';
+
 import {
   Background,
   CityNavegation,
@@ -19,37 +34,62 @@ import {
   PlacesMenu,
   FilterPlaces,
 } from '@/styles/City';
+import averageCalc from '@/utils/averageCalc';
 
-import Banner from '../../../public/images/Banner.png';
-import PontosIcon from '../../../public/images/Pontos.png';
-import ComidaIcon from '../../../public/images/Comidas.png';
-import EventosIcon from '../../../public/images/Eventos.png';
-import ImgageCard from '../../../public/images/Image.png';
-import DestaqueImage from '../../../public/images/Destaque.png';
-import { Container } from '@/styles/GlobalStyles';
-import MyPlaceCard from '@/components/MyPlaceCard';
+interface IParams extends ParsedUrlQuery {
+  id: string;
+}
+
+interface ICategory {
+  id: string;
+  name: string;
+  icon: string;
+}
 
 interface IPlace {
   id: string;
   name: string;
-  image: string;
+  place_image: string;
   description: string;
+  total_depositions_stars: number;
+  number_depositions: number;
+  category: ICategory;
 }
 
-interface CitiesProps {
+interface ICity {
+  id: string;
+  name: string;
+  description: string;
+  image_url: string;
+  place: IPlace[];
+}
+
+interface IndexProps {
+  city: ICity;
   places: IPlace[];
 }
 
-export default function City({ places }: CitiesProps): JSX.Element {
+export default function City({ city, places }: IndexProps): JSX.Element {
   const [filterController, setFilterController] = useState('All');
 
-  const dataFilter = (): IPlace[] | [] => {
+  const router = useRouter();
+
+  const dataFilter = (): ICity[] | [] => {
     // Realizar buscar de acordo com o filtro selecionado.
     return [];
   };
 
+  if (router.isFallback) {
+    return <></>;
+  }
+
   return (
     <>
+      <MySEO
+        title={city.name}
+        description={city.description}
+        image={city.image_url}
+      />
       <Background>
         <MyNavBar>
           <CityNavegation>
@@ -66,7 +106,7 @@ export default function City({ places }: CitiesProps): JSX.Element {
       </Background>
       <CityBanner>
         <Image
-          src={Banner}
+          src={city.image_url}
           layout="fill"
           alt=""
           objectFit="cover"
@@ -78,17 +118,8 @@ export default function City({ places }: CitiesProps): JSX.Element {
         <Container>
           <CityInfoContainer>
             <div className="text-container">
-              <h1>Florianópolis</h1>
-              <h3>
-                Capital do estado de Santa Catarina no sul do Brasil, é
-                maioritariamente constituída pela Ilha de Santa Catarina, com 54
-                km de comprimento.
-              </h3>
-              <p>
-                É famosa pelas suas praias, incluindo estâncias turísticas
-                populares como a Praia dos Ingleses na extremidade norte da
-                ilha.
-              </p>
+              <h1>{city.name}</h1>
+              <h3>{city.description}</h3>
             </div>
             <CityInfo>
               <div className="category">
@@ -208,41 +239,53 @@ export default function City({ places }: CitiesProps): JSX.Element {
             </FilterPlaces>
           </PlacesMenu>
           <PlacesContainer>
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
+            {places.map(place => (
+              <MyPlaceCard
+                key={place.id}
+                image={place.place_image}
+                title={place.name}
+                category={place.category.name}
+                categoryIcon={`http://localhost:3333/${place.category.icon}`}
+                favoriteNote={averageCalc(
+                  place.total_depositions_stars,
+                  place.number_depositions,
+                )}
+                linkTo="#"
+              />
+            ))}
           </PlacesContainer>
         </Container>
       </main>
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps<IndexProps> = async context => {
+  const { id } = context.params as IParams;
+
+  try {
+    const city = await api.get(`/city/${id}`);
+    const places = await api.get('/place');
+
+    console.log(places);
+
+    return {
+      props: {
+        city: city.data,
+        places: places.data,
+      },
+      revalidate: 60,
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+};
