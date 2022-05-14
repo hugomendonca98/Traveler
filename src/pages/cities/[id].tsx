@@ -19,6 +19,7 @@ import ComidaIcon from '../../../public/images/Comidas.png';
 import EventosIcon from '../../../public/images/Eventos.png';
 import ImgageCard from '../../../public/images/Image.png';
 import DestaqueImage from '../../../public/images/Destaque.png';
+import Emoji from '../../../public/images/Emoji.png';
 
 import {
   Background,
@@ -33,8 +34,10 @@ import {
   HrAll,
   PlacesMenu,
   FilterPlaces,
+  PlacesNotFound,
 } from '@/styles/City';
 import averageCalc from '@/utils/averageCalc';
+import textFormat from '@/utils/textFormat';
 
 interface IParams extends ParsedUrlQuery {
   id: string;
@@ -43,7 +46,7 @@ interface IParams extends ParsedUrlQuery {
 interface ICategory {
   id: string;
   name: string;
-  icon: string;
+  icon_image: string;
 }
 
 interface IPlace {
@@ -74,9 +77,18 @@ export default function City({ city, places }: IndexProps): JSX.Element {
 
   const router = useRouter();
 
-  const dataFilter = (): ICity[] | [] => {
+  const dataFilter = (): IPlace[] => {
     // Realizar buscar de acordo com o filtro selecionado.
-    return [];
+    if (filterController !== 'All') {
+      const placeFilter = places.filter(
+        place =>
+          textFormat(place.category.name) === textFormat(filterController),
+      );
+
+      return placeFilter;
+    }
+
+    return places;
   };
 
   if (router.isFallback) {
@@ -215,21 +227,21 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                     Todos
                   </FilterButton>
                   <FilterButton
-                    isActive={filterController === 'Poits'}
-                    onClick={() => setFilterController('Poits')}
+                    isActive={filterController === 'pontos turísticos'}
+                    onClick={() => setFilterController('pontos turísticos')}
                   >
                     Pontos Turísticos
                   </FilterButton>
 
                   <FilterButton
-                    isActive={filterController === 'Foods'}
-                    onClick={() => setFilterController('Foods')}
+                    isActive={filterController === 'comida & bebida'}
+                    onClick={() => setFilterController('comida & bebida')}
                   >
                     Comida & Bebida
                   </FilterButton>
                   <FilterButton
-                    isActive={filterController === 'Events'}
-                    onClick={() => setFilterController('Events')}
+                    isActive={filterController === 'eventos organizados'}
+                    onClick={() => setFilterController('eventos organizados')}
                   >
                     Eventos Organizados
                   </FilterButton>
@@ -238,22 +250,31 @@ export default function City({ city, places }: IndexProps): JSX.Element {
               </div>
             </FilterPlaces>
           </PlacesMenu>
-          <PlacesContainer>
-            {places.map(place => (
-              <MyPlaceCard
-                key={place.id}
-                image={place.place_image}
-                title={place.name}
-                category={place.category.name}
-                categoryIcon={`http://localhost:3333/${place.category.icon}`}
-                favoriteNote={averageCalc(
-                  place.total_depositions_stars,
-                  place.number_depositions,
-                )}
-                linkTo="#"
-              />
-            ))}
-          </PlacesContainer>
+
+          {dataFilter().length <= 0 ? (
+            <PlacesNotFound>
+              <Image src={Emoji} alt="Nenhuma cidade encontrada." />
+              <p>Sem resultados. </p>
+              <p>Tente uma nova busca</p>
+            </PlacesNotFound>
+          ) : (
+            <PlacesContainer>
+              {dataFilter().map(place => (
+                <MyPlaceCard
+                  key={place.id}
+                  image={place.place_image}
+                  title={place.name}
+                  category={place.category.name}
+                  categoryIcon={place.category.icon_image}
+                  favoriteNote={averageCalc(
+                    place.total_depositions_stars,
+                    place.number_depositions,
+                  )}
+                  linkTo="#"
+                />
+              ))}
+            </PlacesContainer>
+          )}
         </Container>
       </main>
     </>
@@ -273,8 +294,6 @@ export const getStaticProps: GetStaticProps<IndexProps> = async context => {
   try {
     const city = await api.get(`/city/${id}`);
     const places = await api.get('/place');
-
-    console.log(places);
 
     return {
       props: {

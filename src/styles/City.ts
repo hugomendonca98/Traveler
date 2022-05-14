@@ -283,3 +283,23 @@ export const HrAll = styled.hr<HrProps>`
   bottom: 0px;
   margin: auto;
 `;
+
+export const PlacesNotFound = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  margin-bottom: 50px;
+
+  p {
+    font-family: Heebo;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 34px;
+    text-align: center;
+    color: ${colors.text.secondary};
+    margin-top: 10px;
+  }
+`;
