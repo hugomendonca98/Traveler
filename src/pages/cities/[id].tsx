@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GetServerSideProps, GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -17,7 +17,6 @@ import api from '@/services/api';
 import PontosIcon from '../../../public/images/Pontos.png';
 import ComidaIcon from '../../../public/images/Comidas.png';
 import EventosIcon from '../../../public/images/Eventos.png';
-import ImgageCard from '../../../public/images/Image.png';
 import DestaqueImage from '../../../public/images/Destaque.png';
 import Emoji from '../../../public/images/Emoji.png';
 
@@ -36,7 +35,6 @@ import {
   FilterPlaces,
   PlacesNotFound,
 } from '@/styles/City';
-import averageCalc from '@/utils/averageCalc';
 import textFormat from '@/utils/textFormat';
 
 interface IParams extends ParsedUrlQuery {
@@ -67,6 +65,17 @@ interface ICity {
   place: IPlace[];
 }
 
+interface IMostPlace {
+  id: string;
+  name: string;
+  place_image: string;
+  description: string;
+  total_depositions_stars: number;
+  number_depositions: number;
+  average: string;
+  category: ICategory;
+}
+
 interface IndexProps {
   city: ICity;
   places: IPlace[];
@@ -77,10 +86,25 @@ export default function City({ city, places }: IndexProps): JSX.Element {
 
   const router = useRouter();
 
-  const dataFilter = (): IPlace[] => {
+  if (router.isFallback) {
+    return <></>;
+  }
+
+  const dataFilter = (): IMostPlace[] => {
+    // Calculando a média de avaliações de cada local.
+    const averagePlaces = places.map(place =>
+      Object.assign(place, {
+        total_depositions_stars: place.total_depositions_stars,
+        number_depositions: place.number_depositions,
+        average: (place.total_depositions_stars / place.number_depositions)
+          .toFixed(1)
+          .toString()
+          .replace('.', ','),
+      }),
+    );
     // Realizar buscar de acordo com o filtro selecionado.
     if (filterController !== 'All') {
-      const placeFilter = places.filter(
+      const placeFilter = averagePlaces.filter(
         place =>
           textFormat(place.category.name) === textFormat(filterController),
       );
@@ -88,12 +112,18 @@ export default function City({ city, places }: IndexProps): JSX.Element {
       return placeFilter;
     }
 
-    return places;
+    return averagePlaces;
   };
 
-  if (router.isFallback) {
-    return <></>;
-  }
+  // Array com os 5 locais mais avaliados.
+  const mostFivePlaces = dataFilter()
+    .sort((prev, curr) =>
+      Number(prev.average) < Number(curr.average) ||
+      Number(prev.number_depositions) < Number(curr.number_depositions)
+        ? 1
+        : -1,
+    )
+    .filter((_, index) => index <= 4);
 
   return (
     <>
@@ -167,38 +197,18 @@ export default function City({ city, places }: IndexProps): JSX.Element {
           </CityInfoContainer>
           <PlacesTitle>Top avaliados</PlacesTitle>
           <PlacesContainer>
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
-            <MyPlaceCard
-              image={ImgageCard}
-              title="Doce & Companhia"
-              category="Comida e Bebida"
-              categoryIcon={ComidaIcon}
-              favoriteNote="4,5"
-              linkTo="#"
-            />
+            {mostFivePlaces &&
+              mostFivePlaces.map(place => (
+                <MyPlaceCard
+                  key={place.id}
+                  image={place.place_image}
+                  title={place.name}
+                  category={place.category.name}
+                  categoryIcon={place.category.icon_image}
+                  favoriteNote={place.average}
+                  linkTo={`/places/${place.id}`}
+                />
+              ))}
           </PlacesContainer>
           <PlacesHighlights>
             <div className="info-container">
@@ -206,14 +216,18 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                 <IoAlertCircleOutline size={25} color="#fff" />
                 <div className="place-icon-text">Destaque</div>
               </div>
-              <h3 className="place-title">Praia dos Ingleses</h3>
+              <h3 className="place-title">{mostFivePlaces[0].name}</h3>
               <p className="place-description">
-                Uma parte do paraíso na terra. Frequentemente com águas claras
-                em tons verdes e azuis. Um dos locais mais preferidos por
-                turistas e viajantes.
+                {mostFivePlaces[0].description}
               </p>
             </div>
-            <Image className="place-image" src={DestaqueImage} alt="" />
+            <Image
+              className="place-image"
+              src={mostFivePlaces[0].place_image}
+              alt={mostFivePlaces[0].name}
+              width={600}
+              height={300}
+            />
           </PlacesHighlights>
           <PlacesMenu>
             <h1>Conheça Todos</h1>
@@ -266,11 +280,8 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                   title={place.name}
                   category={place.category.name}
                   categoryIcon={place.category.icon_image}
-                  favoriteNote={averageCalc(
-                    place.total_depositions_stars,
-                    place.number_depositions,
-                  )}
-                  linkTo="#"
+                  favoriteNote={place.average}
+                  linkTo={`/places/${place.id}`}
                 />
               ))}
             </PlacesContainer>
