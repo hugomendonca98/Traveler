@@ -17,7 +17,6 @@ import api from '@/services/api';
 import PontosIcon from '../../../public/images/Pontos.png';
 import ComidaIcon from '../../../public/images/Comidas.png';
 import EventosIcon from '../../../public/images/Eventos.png';
-import DestaqueImage from '../../../public/images/Destaque.png';
 import Emoji from '../../../public/images/Emoji.png';
 
 import {

@@ -7,9 +7,15 @@ import { Container } from '@/styles/GlobalStyles';
 
 interface NavBarProps {
   children?: ReactNode;
+  loginBtn?: boolean;
+  shadeBorder?: boolean;
 }
 
-export default function MyNavBar({ children }: NavBarProps): JSX.Element {
+export default function MyNavBar({
+  children,
+  loginBtn,
+  shadeBorder = false,
+}: NavBarProps): JSX.Element {
   return (
     <Container>
       <Nav>
@@ -19,9 +25,11 @@ export default function MyNavBar({ children }: NavBarProps): JSX.Element {
           </a>
         </Link>
         {children}
-        <Link href={'#'} passHref>
-          <ToDashboardBtn>Acesso Restrito</ToDashboardBtn>
-        </Link>
+        {loginBtn && (
+          <Link href={'#'} passHref>
+            <ToDashboardBtn>Acesso Restrito</ToDashboardBtn>
+          </Link>
+        )}
       </Nav>
     </Container>
   );

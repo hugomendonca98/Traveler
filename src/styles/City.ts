@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import { darken } from 'polished';
 import styled from 'styled-components';
+import { darken } from 'polished';
+
 import { colors } from './Colors';
 
 interface HrProps {
