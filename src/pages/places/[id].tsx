@@ -24,10 +24,12 @@ import {
 import PlaceImage from '@/../public/images/place.png';
 import Avatar from '@/../public/images/Avatar.png';
 import { Container } from '@/styles/GlobalStyles';
+import MyAddDeposition from '@/components/MyAddDeposition';
 
 export default function Place(): JSX.Element {
   return (
     <>
+      <MyAddDeposition />
       <NavBackground>
         <MyNavBar>
           <PlaceNavegation>
