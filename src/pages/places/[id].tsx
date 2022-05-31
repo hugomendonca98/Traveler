@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { BiArrowBack } from 'react-icons/bi';
@@ -27,9 +27,13 @@ import { Container } from '@/styles/GlobalStyles';
 import MyAddDeposition from '@/components/MyAddDeposition';
 
 export default function Place(): JSX.Element {
+  const [openAddDeposition, setOpenAddDeposition] = useState(false);
+
   return (
     <>
-      <MyAddDeposition />
+      {openAddDeposition && (
+        <MyAddDeposition setOpenAddDeposition={setOpenAddDeposition} />
+      )}
       <NavBackground>
         <MyNavBar>
           <PlaceNavegation>
@@ -126,9 +130,10 @@ export default function Place(): JSX.Element {
                   <p>4,2</p>
                 </div>
                 <div className="depoiment-menu">
-                  <Link href="#" passHref>
-                    <a>Adicionar</a>
-                  </Link>
+                  <button onClick={() => setOpenAddDeposition(true)}>
+                    Adicionar
+                  </button>
+
                   <Link href="#" passHref>
                     <a>Ver todas</a>
                   </Link>

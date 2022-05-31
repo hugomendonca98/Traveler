@@ -241,6 +241,18 @@ export const DepoimentContainer = styled.div`
       margin-right: 25px;
     }
 
+    button {
+      font-family: 'Heebo';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 24px;
+      color: #a0acb3;
+      background: none;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
     a {
       font-family: 'Heebo';
       font-style: normal;

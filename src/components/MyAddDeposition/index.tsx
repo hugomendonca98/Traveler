@@ -7,13 +7,21 @@ import {
   AddDeposition,
   AddDepositionBackground,
   AddDepositionContainer,
+  AvatarLabel,
   FormDeposition,
   StarButton,
 } from './styles';
 
-export default function MyAddDeposition(): JSX.Element {
+interface MyAddDepositionProps {
+  setOpenAddDeposition: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function MyAddDeposition({
+  setOpenAddDeposition,
+}: MyAddDepositionProps): JSX.Element {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [avatar, setAvatar] = useState<null | FileList>(null);
 
   return (
     <AddDepositionContainer>
@@ -21,16 +29,28 @@ export default function MyAddDeposition(): JSX.Element {
       <AddDeposition>
         <div className="title-container">
           <h1>Adicionar avaliação</h1>
-          <button className="close">
+          <button className="close" onClick={() => setOpenAddDeposition(false)}>
             <GrClose />
           </button>
         </div>
         <FormDeposition>
           <div className="photo-container">
-            <label htmlFor="avatar" className="avatar-btn">
-              Upload da sua foto
-            </label>
-            <input type="file" name="avatar" className="avatar" id="avatar" />
+            <AvatarLabel
+              htmlFor="avatar"
+              avatarSelected={avatar && avatar[0] ? 'true' : 'false'}
+            >
+              {avatar && avatar[0]
+                ? 'Feito! Trocar foto'
+                : 'Upload da sua foto'}
+            </AvatarLabel>
+
+            <input
+              type="file"
+              name="avatar"
+              className="avatar"
+              id="avatar"
+              onChange={e => setAvatar(e.target.files)}
+            />
             <input
               type="text"
               name="name"

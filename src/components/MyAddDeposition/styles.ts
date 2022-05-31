@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
 import { colors } from '@/styles/Colors';
+import { darken } from 'polished';
 
 interface StarButtonProps {
   starColor: 'true' | 'false';
   borderRadius: number;
+}
+
+interface AvatarLabelProps {
+  avatarSelected: 'true' | 'false';
 }
 
 export const AddDepositionContainer = styled.div`
@@ -58,7 +63,38 @@ export const AddDeposition = styled.div`
       border: 1px solid ${colors.border.primary};
       border-radius: 10px;
       cursor: pointer;
+      transition: background 200ms;
+
+      &:hover {
+        background: ${darken(0.1, colors.background.white)};
+      }
     }
+  }
+`;
+
+export const AvatarLabel = styled.label<AvatarLabelProps>`
+  background: ${props =>
+    props.avatarSelected === 'true'
+      ? 'linear-gradient(90deg, #DCF5DD 0%, rgba(220, 245, 221, 0) 100%)'
+      : colors.background.lightBlue};
+  border: 1px solid ${colors.border.primary};
+  border-radius: 10px;
+  font-family: 'Heebo';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  color: ${props =>
+    props.avatarSelected === 'true' ? '#51B853' : colors.text.white};
+  padding: 11px 32px;
+  cursor: pointer;
+  transition: background 200ms;
+
+  &:hover {
+    background: ${props =>
+      props.avatarSelected === 'true'
+        ? darken(0.1, '#DCF5DD')
+        : darken(0.1, colors.background.lightBlue)};
   }
 `;
 
@@ -73,20 +109,6 @@ export const FormDeposition = styled.form`
     align-items: center;
     justify-content: center;
     margin-top: 16px;
-
-    label.avatar-btn {
-      background: ${colors.background.lightBlue};
-      border: 1px solid ${colors.border.primary};
-      border-radius: 10px;
-      font-family: 'Heebo';
-      font-style: normal;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 26px;
-      color: ${colors.text.white};
-      padding: 11px 32px;
-      cursor: pointer;
-    }
 
     input.avatar {
       display: none;
@@ -180,6 +202,11 @@ export const FormDeposition = styled.form`
       line-height: 26px;
       color: #ffffff;
       cursor: pointer;
+      transition: background 200ms;
+
+      &:hover {
+        background: ${darken(0.1, '#51b853')};
+      }
     }
   }
 `;
