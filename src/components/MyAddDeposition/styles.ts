@@ -4,12 +4,19 @@ import { colors } from '@/styles/Colors';
 import { darken } from 'polished';
 
 interface StarButtonProps {
-  starColor: 'true' | 'false';
+  starColor: boolean;
   borderRadius: number;
 }
 
 interface AvatarLabelProps {
-  avatarSelected: 'true' | 'false';
+  avatarSelected: boolean;
+  isError: boolean;
+}
+
+interface FormDepositionProps {
+  isErrorName: boolean;
+  isErrorDescription: boolean;
+  isErrorStars: boolean;
 }
 
 export const AddDepositionContainer = styled.div`
@@ -74,31 +81,31 @@ export const AddDeposition = styled.div`
 
 export const AvatarLabel = styled.label<AvatarLabelProps>`
   background: ${props =>
-    props.avatarSelected === 'true'
+    props.avatarSelected
       ? 'linear-gradient(90deg, #DCF5DD 0%, rgba(220, 245, 221, 0) 100%)'
       : colors.background.lightBlue};
-  border: 1px solid ${colors.border.primary};
+  border: 1px solid
+    ${props => (props.isError ? '#cf4646' : colors.border.primary)};
   border-radius: 10px;
   font-family: 'Heebo';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 26px;
-  color: ${props =>
-    props.avatarSelected === 'true' ? '#51B853' : colors.text.white};
+  color: ${props => (props.avatarSelected ? '#51B853' : colors.text.white)};
   padding: 11px 32px;
   cursor: pointer;
   transition: background 200ms;
 
   &:hover {
     background: ${props =>
-      props.avatarSelected === 'true'
+      props.avatarSelected
         ? darken(0.1, '#DCF5DD')
         : darken(0.1, colors.background.lightBlue)};
   }
 `;
 
-export const FormDeposition = styled.form`
+export const FormDeposition = styled.form<FormDepositionProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -118,7 +125,8 @@ export const FormDeposition = styled.form`
       width: 441px;
       height: 48px;
       background: ${colors.background.white};
-      border: 1px solid ${colors.border.primary};
+      border: 1px solid
+        ${props => (props.isErrorName ? '#cf4646' : colors.border.primary)};
       border-radius: 10px;
       margin-left: 16px;
       padding: 0px 24px;
@@ -132,7 +140,8 @@ export const FormDeposition = styled.form`
     margin-top: 16px;
     padding: 18px 24px;
     background: ${colors.background.white};
-    border: 1px solid ${colors.border.primary};
+    border: 1px solid
+      ${props => (props.isErrorDescription ? '#cf4646' : colors.border.primary)};
     border-radius: 10px;
     outline: none;
     font-family: 'Heebo';
@@ -149,6 +158,10 @@ export const FormDeposition = styled.form`
     align-items: center;
     margin-top: 16px;
 
+    input {
+      display: none;
+    }
+
     p {
       font-family: 'Heebo';
       font-style: normal;
@@ -163,6 +176,8 @@ export const FormDeposition = styled.form`
       display: flex;
       align-items: center;
       justify-content: center;
+      border: ${props => (props.isErrorStars ? '1px solid red' : 'none')};
+      border-radius: 10px;
     }
   }
 
@@ -214,9 +229,8 @@ export const FormDeposition = styled.form`
 export const StarButton = styled.button<StarButtonProps>`
   width: 104px;
   height: 48px;
-  background: ${props => (props.starColor === 'true' ? '#FEF7F5' : '#fff')};
-  border: 1px solid
-    ${props => (props.starColor === 'true' ? '#F1BEAC' : '#dce2e6')};
+  background: ${props => (props.starColor ? '#FEF7F5' : '#fff')};
+  border: 1px solid ${props => (props.starColor ? '#F1BEAC' : '#dce2e6')};
   border-radius: ${props =>
     props.borderRadius === 1
       ? '10px 0px 0px 10px'
@@ -224,5 +238,5 @@ export const StarButton = styled.button<StarButtonProps>`
       ? '0px 10px 10px 0px'
       : 'none'};
   cursor: pointer;
-  color: ${props => (props.starColor === 'true' ? '#F25D27' : '#ccc')};
+  color: ${props => (props.starColor ? '#F25D27' : '#ccc')};
 `;

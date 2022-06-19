@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
 import { BiArrowBack } from 'react-icons/bi';
 import { BsFillTelephoneFill } from 'react-icons/bs';
 import { FaStar } from 'react-icons/fa';
 
 import MyNavBar from '@/components/MyNavBar';
 
+import { Container } from '@/styles/GlobalStyles';
 import {
   AddressContainer,
   AttendanceContainer,
@@ -21,18 +25,32 @@ import {
   PlaceHeader,
   PlaceNavegation,
 } from '@/styles/Place';
+
 import PlaceImage from '@/../public/images/place.png';
 import Avatar from '@/../public/images/Avatar.png';
-import { Container } from '@/styles/GlobalStyles';
-import MyAddDeposition from '@/components/MyAddDeposition';
+import { useSuccessMessage } from '@/contexts/MySuccessMessageContext';
 
 export default function Place(): JSX.Element {
   const [openAddDeposition, setOpenAddDeposition] = useState(false);
+
+  const { isOpen } = useSuccessMessage();
+
+  const MyAddDeposition = dynamic(() => import('@/components/MyAddDeposition'));
+  const MySuccessMessage = dynamic(
+    () => import('@/components/MySuccessMessage'),
+  );
 
   return (
     <>
       {openAddDeposition && (
         <MyAddDeposition setOpenAddDeposition={setOpenAddDeposition} />
+      )}
+      {isOpen && (
+        <MySuccessMessage
+          title="Avaliação enviada!"
+          description="Agradecemos pelo seu tempo e colaboração."
+          btnText="Disponha :)"
+        />
       )}
       <NavBackground>
         <MyNavBar>

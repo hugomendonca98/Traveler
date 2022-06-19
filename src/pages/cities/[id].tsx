@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
+import Error from 'next/error';
 
 import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 import { BiArrowBack } from 'react-icons/bi';
 import { IoAlertCircleOutline } from 'react-icons/io5';
 
+import { Container } from '@/styles/GlobalStyles';
+
 import MyNavBar from '@/components/MyNavBar';
 import MyPlaceCard from '@/components/MyPlaceCard';
 import MySEO from '@/components/MySEO';
-import { Container } from '@/styles/GlobalStyles';
 import api from '@/services/api';
 
 import PontosIcon from '../../../public/images/Pontos.png';
@@ -84,6 +86,9 @@ export default function City({ city, places }: IndexProps): JSX.Element {
   const [filterController, setFilterController] = useState('All');
 
   const router = useRouter();
+
+  if (Error) {
+  }
 
   if (router.isFallback) {
     return <></>;
@@ -305,16 +310,12 @@ export const getStaticProps: GetStaticProps<IndexProps> = async context => {
     const city = await api.get(`/city/${id}`);
     const places = await api.get('/place');
 
-    return {
-      props: {
-        city: city.data,
-        places: places.data,
-      },
-      revalidate: 60,
-    };
-  } catch (error) {
-    return {
-      notFound: true,
-    };
+    if (!city || !places) {
+      return { notFound: true };
+    }
+
+    return { props: { city: city.data, places: places.data } };
+  } catch (_) {
+    return { notFound: true };
   }
 };
