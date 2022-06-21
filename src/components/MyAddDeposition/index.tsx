@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
+
 import { GrClose } from 'react-icons/gr';
 import { AiFillStar } from 'react-icons/ai';
 import { RiErrorWarningLine } from 'react-icons/ri';
@@ -13,13 +15,10 @@ import {
   FormDeposition,
   StarButton,
 } from './styles';
+
 import api from '@/services/api';
-import { useRouter } from 'next/router';
-import MySuccessMessage from '../MySuccessMessage';
-import {
-  MySuccessMessageProvider,
-  useSuccessMessage,
-} from '@/contexts/MySuccessMessageContext';
+import { useSuccessMessage } from '@/contexts/MySuccessMessageContext';
+import MyLoading from '../MyLoading';
 
 interface MyAddDepositionProps {
   setOpenAddDeposition: React.Dispatch<React.SetStateAction<boolean>>;
@@ -38,7 +37,9 @@ export default function MyAddDeposition({
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [avatar, setAvatar] = useState<null | FileList>(null);
-  const { isOpen, setIsOpen } = useSuccessMessage();
+  const [loading, setLoading] = useState(false);
+
+  const { setIsOpen } = useSuccessMessage();
 
   const { query } = useRouter();
 
@@ -50,6 +51,7 @@ export default function MyAddDeposition({
 
   const onSubmit: SubmitHandler<Inputs> = useCallback(
     async data => {
+      setLoading(true);
       if (avatar && avatar[0]) {
         const sendData = new FormData();
         sendData.append('name', data.name);
@@ -63,6 +65,7 @@ export default function MyAddDeposition({
             },
           });
           setOpenAddDeposition(false);
+          setLoading(false);
           setIsOpen(true);
         } catch (error) {
           toast.error(
@@ -88,6 +91,7 @@ export default function MyAddDeposition({
     <>
       <AddDepositionContainer>
         <AddDepositionBackground />
+        {loading && <MyLoading />}
         <AddDeposition>
           <div className="title-container">
             <h1>Adicionar avaliação</h1>
