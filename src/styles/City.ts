@@ -16,7 +16,7 @@ export const Background = styled.div`
 `;
 
 export const CityNavegation = styled.div`
-  width: 65%;
+  width: 82%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -39,7 +39,7 @@ export const CityNavegation = styled.div`
   }
 
   div {
-    margin-left: 40%;
+    margin-left: 30%;
 
     h3 {
       font-family: Barlow;
