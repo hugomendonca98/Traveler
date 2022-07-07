@@ -120,14 +120,40 @@ export default function City({ city, places }: IndexProps): JSX.Element {
   };
 
   // Array com os 5 locais mais avaliados.
-  const mostFivePlaces = dataFilter()
-    .sort((prev, curr) =>
-      Number(prev.average) < Number(curr.average) ||
-      Number(prev.number_depositions) < Number(curr.number_depositions)
-        ? 1
-        : -1,
-    )
-    .filter((_, index) => index <= 4);
+  const mostFivePlaces = (): IMostPlace[] => {
+    const averagePlaces = places
+      .map(place =>
+        Object.assign(place, {
+          total_depositions_stars: place.total_depositions_stars,
+          number_depositions: place.number_depositions,
+          average: (place.total_depositions_stars / place.number_depositions)
+            .toFixed(1)
+            .toString()
+            .replace('.', ','),
+        }),
+      )
+      .sort((prev, curr) =>
+        Number(prev.average) < Number(curr.average) ||
+        Number(prev.number_depositions) < Number(curr.number_depositions)
+          ? 1
+          : -1,
+      )
+      .filter((_, index) => index <= 4);
+
+    return averagePlaces;
+  };
+
+  // Contando quantos locais tem de cada categoria.
+  const checkOccurrence = (name: string): Number => {
+    let counter = 0;
+
+    for (let item of city.place) {
+      if (textFormat(item.name) === textFormat(name)) {
+        counter++;
+      }
+    }
+    return counter;
+  };
 
   return (
     <>
@@ -173,7 +199,9 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                   <Image width={40} height={40} src={PontosIcon} alt="" />
                 </div>
                 <div className="info">
-                  <p className="category-number">60</p>
+                  <p className="category-number">
+                    {checkOccurrence('Pontos Turísticos')}
+                  </p>
                   <p className="category-name">Pontos Turísticos</p>
                 </div>
               </div>
@@ -183,7 +211,9 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                   <Image width={40} height={40} src={ComidaIcon} alt="" />
                 </div>
                 <div className="info">
-                  <p className="category-number">20</p>
+                  <p className="category-number">
+                    {checkOccurrence('Comida e Bebida')}
+                  </p>
                   <p className="category-name">Comida e Bebida</p>
                 </div>
               </div>
@@ -193,7 +223,9 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                   <Image width={40} height={40} src={EventosIcon} alt="" />
                 </div>
                 <div className="info">
-                  <p className="category-number">11</p>
+                  <p className="category-number">
+                    {checkOccurrence('Eventos Organizados')}
+                  </p>
                   <p className="category-name">Eventos Organizados</p>
                 </div>
               </div>
@@ -202,7 +234,7 @@ export default function City({ city, places }: IndexProps): JSX.Element {
           <PlacesTitle>Top avaliados</PlacesTitle>
           <PlacesContainer>
             {mostFivePlaces &&
-              mostFivePlaces.map(place => (
+              mostFivePlaces().map(place => (
                 <MyPlaceCard
                   key={place.id}
                   image={place.place_image}
@@ -220,15 +252,15 @@ export default function City({ city, places }: IndexProps): JSX.Element {
                 <IoAlertCircleOutline size={25} color="#fff" />
                 <div className="place-icon-text">Destaque</div>
               </div>
-              <h3 className="place-title">{mostFivePlaces[0].name}</h3>
+              <h3 className="place-title">{mostFivePlaces()[0].name}</h3>
               <p className="place-description">
-                {mostFivePlaces[0].description}
+                {mostFivePlaces()[0].description}
               </p>
             </div>
             <Image
               className="place-image"
-              src={mostFivePlaces[0].place_image}
-              alt={mostFivePlaces[0].name}
+              src={mostFivePlaces()[0].place_image}
+              alt={mostFivePlaces()[0].name}
               width={600}
               height={300}
             />
