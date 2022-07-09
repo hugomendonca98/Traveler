@@ -10,6 +10,14 @@ export const Nav = styled.nav`
   flex-wrap: wrap;
   width: 100%;
   height: 100px;
+
+  @media screen and (max-width: 480px) {
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const ToDashboardBtn = styled.a`

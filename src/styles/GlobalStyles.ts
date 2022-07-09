@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         margin: 0;
         box-sizing: border-box;
+
     }
 
     body {
@@ -31,4 +32,20 @@ export const GlobalStyles = createGlobalStyle`
 export const Container = styled.div`
   width: 1140px;
   margin: auto;
+
+  @media screen and (max-width: 1200px) {
+    width: 1025px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 769px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 481px;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 320px;
+  }
 `;

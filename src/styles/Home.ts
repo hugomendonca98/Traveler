@@ -45,6 +45,44 @@ export const Main = styled.main`
     justify-content: end;
     height: 100%;
   }
+
+  @media screen and (max-width: 1200px) {
+    width: 1025px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 769px;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 481px;
+
+    div.image-container {
+      display: none;
+    }
+
+    div.main-text {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 320px;
+
+    div.main-text {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0;
+    }
+
+    div.image-container {
+      display: none;
+    }
+  }
 `;
 
 export const BtnHeader = styled.a`
