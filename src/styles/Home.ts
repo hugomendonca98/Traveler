@@ -46,42 +46,56 @@ export const Main = styled.main`
     height: 100%;
   }
 
-  @media screen and (max-width: 1200px) {
+  @media (max-width: 1300px) {
     width: 1025px;
+    margin: auto;
+
+    div.main-text {
+      width: 600px;
+
+      h1 {
+        font-size: 75px;
+        line-height: normal;
+      }
+    }
+
+    div.image-container {
+      width: 400px;
+    }
   }
 
-  @media screen and (max-width: 1024px) {
+  @media (max-width: 1024px) {
     width: 769px;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 481px;
 
     div.image-container {
       display: none;
     }
 
     div.main-text {
+      width: 480px;
       justify-content: center;
       align-items: center;
       text-align: center;
-      margin: 0;
+      margin: auto;
     }
   }
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 768px) {
+    width: 480px;
+
+    div.main-text {
+      h1 {
+        font-size: 55px;
+      }
+
+      p {
+        font-size: 17px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
     width: 320px;
-
-    div.main-text {
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      margin: 0;
-    }
-
-    div.image-container {
-      display: none;
-    }
   }
 `;
 
@@ -102,5 +116,9 @@ export const BtnHeader = styled.a`
   &:hover {
     transition: background 300ms;
     background-color: ${lighten(0.1, colors.background.orange)};
+  }
+
+  @media (max-width: 1024px) {
+    font-size: 17px;
   }
 `;

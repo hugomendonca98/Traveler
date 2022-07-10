@@ -126,15 +126,53 @@ export default function Cities({ cities }: CitiesProps): JSX.Element {
           ) : (
             <CitiesContainer>
               {dataFilter().map(city => (
-                <MyCityCard
-                  key={city.id}
-                  linkTo={`/cities/${city.id}`}
-                  image={city.image_url}
-                  title={city.name}
-                  description={`${String(city.place.length)} ${
-                    city.place.length > 1 ? 'Locais' : 'Local'
-                  }`}
-                />
+                <>
+                  <MyCityCard
+                    key={city.id}
+                    linkTo={`/cities/${city.id}`}
+                    image={city.image_url}
+                    title={city.name}
+                    description={`${String(city.place.length)} ${
+                      city.place.length > 1 ? 'Locais' : 'Local'
+                    }`}
+                  />
+                  <MyCityCard
+                    key={city.id}
+                    linkTo={`/cities/${city.id}`}
+                    image={city.image_url}
+                    title={city.name}
+                    description={`${String(city.place.length)} ${
+                      city.place.length > 1 ? 'Locais' : 'Local'
+                    }`}
+                  />
+                  <MyCityCard
+                    key={city.id}
+                    linkTo={`/cities/${city.id}`}
+                    image={city.image_url}
+                    title={city.name}
+                    description={`${String(city.place.length)} ${
+                      city.place.length > 1 ? 'Locais' : 'Local'
+                    }`}
+                  />
+                  <MyCityCard
+                    key={city.id}
+                    linkTo={`/cities/${city.id}`}
+                    image={city.image_url}
+                    title={city.name}
+                    description={`${String(city.place.length)} ${
+                      city.place.length > 1 ? 'Locais' : 'Local'
+                    }`}
+                  />
+                  <MyCityCard
+                    key={city.id}
+                    linkTo={`/cities/${city.id}`}
+                    image={city.image_url}
+                    title={city.name}
+                    description={`${String(city.place.length)} ${
+                      city.place.length > 1 ? 'Locais' : 'Local'
+                    }`}
+                  />
+                </>
               ))}
             </CitiesContainer>
           )}

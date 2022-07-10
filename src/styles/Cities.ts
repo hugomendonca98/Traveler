@@ -79,6 +79,17 @@ export const CitiesContainer = styled.div`
   margin: auto;
   margin-top: 40px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: 1200px) {
+    width: 1025px;
+  }
+
+  @media screen and (max-width: 1024px) {
+    width: 769px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
 `;
 
 export const CitiesNotFound = styled.div`

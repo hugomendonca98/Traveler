@@ -11,12 +11,22 @@ export const Nav = styled.nav`
   width: 100%;
   height: 100px;
 
-  @media screen and (max-width: 480px) {
+  @media (max-width: 1200px) {
+    width: 1025px;
+    margin: auto;
+  }
+
+  @media (max-width: 1024px) {
+    width: 769px;
     justify-content: center;
   }
 
-  @media screen and (max-width: 768px) {
-    justify-content: center;
+  @media (max-width: 768px) {
+    width: 480px;
+  }
+
+  @media (max-width: 480px) {
+    width: 320px;
   }
 `;
 
