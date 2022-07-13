@@ -12,21 +12,24 @@ export const Nav = styled.nav`
   height: 100px;
 
   @media (max-width: 1200px) {
-    width: 1025px;
-    margin: auto;
+    width: 1000px;
   }
 
   @media (max-width: 1024px) {
-    width: 769px;
+    width: 500px;
+    align-items: center;
     justify-content: center;
+    padding: 15px 0px;
+    height: auto;
+    margin: auto;
   }
 
   @media (max-width: 768px) {
-    width: 480px;
+    width: 400px;
   }
 
   @media (max-width: 480px) {
-    width: 320px;
+    width: 300px;
   }
 `;
 

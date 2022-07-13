@@ -32,6 +32,18 @@ export const InputContainer = styled.div`
   width: fit-content;
   display: flex;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    margin-top: 10px;
+  }
+
+  @media (max-width: 768px) {
+    width: 380px;
+  }
+
+  @media (max-width: 480px) {
+    width: 320px;
+  }
 `;
 
 export const SearchInput = styled.input`

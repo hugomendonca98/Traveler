@@ -7,7 +7,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { MySuccessMessageProvider } from '@/contexts/MySuccessMessageContext';
 
-/*const progress = new ProgressBar({
+const progress = new ProgressBar({
   size: 2,
   color: '#F25D27',
   className: 'bar-of-progress',
@@ -16,7 +16,7 @@ import { MySuccessMessageProvider } from '@/contexts/MySuccessMessageContext';
 
 Router.events.on('routeChangeStart', progress.start);
 Router.events.on('routeChangeComplete', progress.finish);
-Router.events.on('routeChangeError', progress.finish);*/
+Router.events.on('routeChangeError', progress.finish);
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (

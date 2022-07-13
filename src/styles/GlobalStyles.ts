@@ -33,18 +33,18 @@ export const Container = styled.div`
   margin: auto;
 
   @media (max-width: 1300px) {
-    width: 1025px;
+    width: 1000px;
   }
 
   @media (max-width: 1024px) {
-    width: 769px;
+    width: 750px;
   }
 
   @media (max-width: 768px) {
-    width: 480px;
+    width: 400px;
   }
 
   @media (max-width: 480px) {
-    width: 320px;
+    width: 300px;
   }
 `;

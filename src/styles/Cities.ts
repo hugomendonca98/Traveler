@@ -43,6 +43,37 @@ export const FilterCities = styled.div`
       width: 274px;
     }
   }
+
+  @media (max-width: 1300px) {
+    width: 1000px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 1024px) {
+    width: 750px;
+  }
+
+  @media (max-width: 768px) {
+    width: 400px;
+    margin: auto;
+    justify-content: center;
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    div.filter-hr {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 300px;
+
+    h1 {
+      font-size: 30px;
+    }
+  }
 `;
 
 export const FilterButton = styled.button<BtnProps>`
@@ -80,15 +111,22 @@ export const CitiesContainer = styled.div`
   margin-top: 40px;
   margin-bottom: 20px;
 
-  @media screen and (max-width: 1200px) {
-    width: 1025px;
+  @media (max-width: 1300px) {
+    width: 1000px;
   }
 
-  @media screen and (max-width: 1024px) {
-    width: 769px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-    margin-bottom: 20px;
+  @media (max-width: 1024px) {
+    width: 553px;
+  }
+
+  @media (max-width: 768px) {
+    width: 400px;
+    margin: auto;
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    width: 300px;
   }
 `;
 
