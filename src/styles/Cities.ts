@@ -45,18 +45,17 @@ export const FilterCities = styled.div`
   }
 
   @media (max-width: 1300px) {
-    width: 1000px;
+    width: 100%;
     flex-wrap: wrap;
-  }
-
-  @media (max-width: 1024px) {
-    width: 750px;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   @media (max-width: 768px) {
-    width: 400px;
     margin: auto;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 
     h1 {
       margin-bottom: 10px;
@@ -68,8 +67,7 @@ export const FilterCities = styled.div`
   }
 
   @media (max-width: 480px) {
-    width: 300px;
-
+    padding: 10px;
     h1 {
       font-size: 30px;
     }

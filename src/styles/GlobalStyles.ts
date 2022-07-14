@@ -37,14 +37,14 @@ export const Container = styled.div`
   }
 
   @media (max-width: 1024px) {
-    width: 750px;
+    width: 100%;
   }
 
-  @media (max-width: 768px) {
+  /*@media (max-width: 768px) {
     width: 400px;
   }
 
   @media (max-width: 480px) {
     width: 300px;
-  }
+  }*/
 `;

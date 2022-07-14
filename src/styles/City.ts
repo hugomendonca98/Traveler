@@ -50,6 +50,18 @@ export const CityNavegation = styled.div`
       color: ${colors.text.gray};
     }
   }
+
+  @media (max-width: 1024px) {
+    padding-top: 20px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+
+    div {
+      margin-left: 25%;
+    }
+  }
 `;
 
 export const CityBanner = styled.div`
@@ -93,11 +105,17 @@ export const CityInfoContainer = styled.section`
       color: ${colors.text.secondary};
     }
   }
+
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+    padding: 20px;
+  }
 `;
 
 export const CityInfo = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   div.category {
     width: 140px;
@@ -136,6 +154,12 @@ export const CityInfo = styled.div`
       }
     }
   }
+
+  @media (max-width: 768px) {
+    div.category {
+      margin-top: 16px;
+    }
+  }
 `;
 
 export const PlacesTitle = styled.h2`
@@ -145,12 +169,14 @@ export const PlacesTitle = styled.h2`
   font-size: 36px;
   line-height: 46px;
   color: ${colors.text.primary};
+  margin: 20px;
   margin-top: 120px;
 `;
 
 export const PlacesContainer = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 20px;
   margin-top: 40px;
   margin-bottom: 20px;
 `;
@@ -211,6 +237,23 @@ export const PlacesHighlights = styled.div`
   img.place-image {
     border-radius: 0px 16px 16px 0px;
   }
+
+  @media (max-width: 1024px) {
+    width: 95%;
+    justify-content: center;
+    margin: 80px auto;
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    flex-direction: column-reverse;
+    margin: 80px auto;
+    height: auto;
+
+    img.place-image {
+      border-radius: 16px 16px 0px 0px;
+    }
+  }
 `;
 
 export const PlacesMenu = styled.div`
@@ -225,6 +268,19 @@ export const PlacesMenu = styled.div`
     font-size: 36px;
     line-height: 46px;
     color: ${colors.text.primary};
+  }
+
+  @media (max-width: 1024px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 30px;
+      margin-bottom: 5px;
+      margin-right: 20px;
+      padding: 10px;
+    }
   }
 `;
 
@@ -252,6 +308,14 @@ export const FilterPlaces = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    white-space: nowrap;
+
+    div.filter-container {
+      flex-wrap: wrap;
     }
   }
 `;
@@ -282,6 +346,10 @@ export const HrAll = styled.hr<HrProps>`
   position: absolute;
   bottom: 0px;
   margin: auto;
+
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const PlacesNotFound = styled.div`
