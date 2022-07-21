@@ -30,6 +30,10 @@ export const PlaceNavegation = styled.div`
       background-color: ${darken(0.07, colors.background.white)};
     }
   }
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 export const PlaceHeader = styled.header`
@@ -68,6 +72,36 @@ export const PlaceHeader = styled.header`
     top: 0;
     right: 0;
   }
+
+  @media (max-width: 1300px) {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 90%;
+
+    div.text-content {
+      width: auto;
+
+      h1 {
+        width: auto;
+      }
+    }
+    div.header-image {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    div.text-content {
+      width: 100%;
+
+      p.description {
+        width: 100%;
+        padding: 10px;
+      }
+    }
+  }
 `;
 
 export const AttendanceContainer = styled.div`
@@ -89,6 +123,11 @@ export const AttendanceContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-top: 32px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
   }
 `;
 
@@ -170,6 +209,21 @@ export const ContactContainer = styled.div`
       color: #123952;
     }
   }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+    justify-content: center;
+    flex-direction: column;
+
+    div.contact-button {
+      margin-right: 0px;
+    }
+
+    div.contact-container {
+      margin-top: 15px;
+    }
+  }
 `;
 
 export const AddressContainer = styled.div`
@@ -202,6 +256,18 @@ export const AddressContainer = styled.div`
       color: #a0acb3;
     }
   }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+    flex-wrap: wrap;
+
+    div.address-title {
+      a {
+        margin-bottom: 10px;
+      }
+    }
+  }
 `;
 
 export const MapContainer = styled.div`
@@ -217,6 +283,15 @@ export const MapContainer = styled.div`
     color: #617480;
     margin-top: 24px;
     margin-bottom: 80px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+
+    iframe {
+      width: 340px;
+    }
   }
 `;
 
@@ -293,10 +368,33 @@ export const DepoimentContainer = styled.div`
       color: #a0acb3;
     }
   }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0px;
+
+    div.depoiment {
+      flex-direction: column;
+    }
+
+    div.depoiment-menu {
+      margin-top: 10px;
+    }
+  }
 `;
 
 export const DepoimentCards = styled.div`
   width: 448px;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding: 10px;
+
+    p {
+      text-align: start;
+    }
+  }
 `;
 
 export const AvatarImage = styled(Image).attrs({

@@ -40,11 +40,11 @@ export const Container = styled.div`
     width: 100%;
   }
 
-  /*@media (max-width: 768px) {
-    width: 400px;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 
   @media (max-width: 480px) {
-    width: 300px;
-  }*/
+    width: 100%;
+  }
 `;

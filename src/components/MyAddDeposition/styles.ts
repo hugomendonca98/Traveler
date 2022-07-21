@@ -22,6 +22,10 @@ interface FormDepositionProps {
 export const AddDepositionContainer = styled.div`
   display: flex;
   justify-content: center;
+
+  @media (max-width: 592px) {
+    justify-content: normal;
+  }
 `;
 
 export const AddDepositionBackground = styled.div`
@@ -76,6 +80,31 @@ export const AddDeposition = styled.div`
         background: ${darken(0.1, colors.background.white)};
       }
     }
+  }
+
+  @media (max-width: 1300px) {
+    width: 90%;
+    min-height: 528px;
+  }
+
+  @media (max-width: 1300px) and (max-height: 590px) {
+    position: absolute;
+    top: 200%;
+    margin-top: -25px;
+    width: 90%;
+    height: 100%;
+  }
+
+  @media (max-width: 820px) {
+    width: 90%;
+    height: auto;
+  }
+
+  @media (max-width: 592px) {
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0px;
   }
 `;
 
@@ -224,6 +253,80 @@ export const FormDeposition = styled.form<FormDepositionProps>`
       }
     }
   }
+
+  @media (max-width: 820px) {
+    flex-wrap: wrap;
+    min-height: 528px;
+
+    div.photo-container {
+      flex-wrap: wrap;
+
+      input.name {
+        width: 90%;
+        margin-top: 10px;
+      }
+    }
+
+    textarea.description {
+      width: 90%;
+    }
+
+    div.star-container {
+      width: 90%;
+
+      div.stars {
+      }
+    }
+
+    div.send-container {
+      width: 90%;
+    }
+  }
+
+  @media (max-width: 877px) and (max-height: 590px) {
+    justify-content: normal;
+
+    div.photo-container {
+      input.name {
+        margin-top: 10px;
+      }
+    }
+  }
+
+  @media (max-width: 592px) {
+    height: 100%;
+    justify-content: flex-start;
+
+    div.photo-container {
+      input.name {
+        margin-top: 20px;
+        margin-left: 0px;
+      }
+    }
+
+    textarea.description {
+      width: 90%;
+      height: 70px;
+    }
+
+    div.star-container {
+      flex-direction: column;
+      p {
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
+    }
+
+    div.send-container {
+      flex-direction: column;
+      justify-content: center;
+      div {
+        text-align: start;
+
+        margin-bottom: 20px;
+      }
+    }
+  }
 `;
 
 export const StarButton = styled.button<StarButtonProps>`
@@ -239,4 +342,12 @@ export const StarButton = styled.button<StarButtonProps>`
       : 'none'};
   cursor: pointer;
   color: ${props => (props.starColor ? '#F25D27' : '#ccc')};
+
+  @media (max-width: 877px) {
+    width: 70px;
+  }
+
+  @media (max-width: 592px) {
+    width: 50px;
+  }
 `;
