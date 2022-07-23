@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'traveler-node.s3-sa-east-1.amazonaws.com'],
   },
 };
 

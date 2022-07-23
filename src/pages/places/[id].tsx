@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import Link from 'next/link';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import Error from 'next/error';
 
 import { BiArrowBack } from 'react-icons/bi';
 import { BsFillTelephoneFill } from 'react-icons/bs';
@@ -29,8 +30,57 @@ import {
 import PlaceImage from '@/../public/images/place.png';
 import Avatar from '@/../public/images/Avatar.png';
 import { useSuccessMessage } from '@/contexts/MySuccessMessageContext';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
-export default function Place(): JSX.Element {
+import api from '@/services/api';
+import MySEO from '@/components/MySEO';
+import { useRouter } from 'next/router';
+import iframeStreetLink from '@/utils/iframeStreetLink';
+
+interface IParams extends ParsedUrlQuery {
+  id: string;
+}
+
+interface ICategory {
+  id: string;
+  name: string;
+  icon_image: string;
+}
+
+interface IAddress {
+  id: string;
+  zip_code: string;
+  street: string;
+  neighborhood: string;
+  number: number;
+}
+
+interface IDeposition {
+  id: string;
+  name: string;
+  description: string;
+  stars: number;
+  avatar_url: string;
+}
+
+interface IPlace {
+  id: string;
+  name: string;
+  place_image: string;
+  description: string;
+  total_depositions_stars: number;
+  number_depositions: number;
+  category: ICategory;
+  address: IAddress;
+  depositions: IDeposition[];
+}
+
+interface IProps {
+  place: IPlace;
+}
+
+export default function Place({ place }: IProps): JSX.Element {
   const [openAddDeposition, setOpenAddDeposition] = useState(false);
 
   const { isOpen } = useSuccessMessage();
@@ -40,8 +90,22 @@ export default function Place(): JSX.Element {
     () => import('@/components/MySuccessMessage'),
   );
 
+  const router = useRouter();
+
+  if (Error) {
+  }
+
+  if (router.isFallback) {
+    return <></>;
+  }
+
   return (
     <>
+      <MySEO
+        title={place.name}
+        description={place.description}
+        image={place.place_image}
+      />
       {openAddDeposition && (
         <MyAddDeposition setOpenAddDeposition={setOpenAddDeposition} />
       )}
@@ -66,11 +130,8 @@ export default function Place(): JSX.Element {
       <Container>
         <PlaceHeader>
           <div className="text-content">
-            <h1>Doce & Companhia</h1>
-            <p className="description">
-              O melhor lugar da cidade para você tomar um bom café. Fatias de
-              tortas artesanais, bolos, lanches e biscoitos caseiros.
-            </p>
+            <h1>{place.name}</h1>
+            <p className="description">{place.description}</p>
 
             <AttendanceContainer>
               <h2>Atendimento</h2>
@@ -135,9 +196,18 @@ export default function Place(): JSX.Element {
                   scrolling="no"
                   marginHeight={0}
                   marginWidth={0}
-                  src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Avenida%20Aparecida%20do%20Rio%20Negro,%20316+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                  src={`https://maps.google.com/maps?q=${iframeStreetLink(
+                    place.address.street,
+                  )}%20-%20${iframeStreetLink(
+                    place.address.neighborhood,
+                  )},%20${iframeStreetLink(
+                    place.address.zip_code,
+                  )}&t=&z=13&ie=UTF8&iwloc=&output=embed`}
                 ></iframe>
-                <p>Rua 7 de Setembro, 319 - Jardim América - 89160-170</p>
+                <p>
+                  {place.address.street} - {place.address.neighborhood} -{' '}
+                  {place.address.zip_code}
+                </p>
               </MapContainer>
             </AddressContainer>
             <DepoimentContainer>
@@ -159,75 +229,26 @@ export default function Place(): JSX.Element {
               </div>
             </DepoimentContainer>
             <DepoimentCards>
-              <Depoiment>
-                <div className="card-title">
-                  <div className="title-avatar">
-                    <div className="avatar-image">
-                      <AvatarImage src={Avatar} alt="" />
+              {place.depositions.map(deposition => (
+                <Depoiment key={deposition.id}>
+                  <div className="card-title">
+                    <div className="title-avatar">
+                      <div className="avatar-image">
+                        <AvatarImage src={deposition.avatar_url} alt="" />
+                      </div>
+                      <h2>{deposition.name}</h2>
                     </div>
-                    <h2>Maria Eduarda</h2>
-                  </div>
 
-                  <div className="stars">
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                  </div>
-                </div>
-
-                <p>
-                  Todos os produtos comercializados são de excelente qualidade,
-                  recomendo!
-                </p>
-              </Depoiment>
-              <Depoiment>
-                <div className="card-title">
-                  <div className="title-avatar">
-                    <div className="avatar-image">
-                      <AvatarImage src={Avatar} alt="" />
+                    <div className="stars">
+                      {Array.from(Array(deposition.stars), (_, i) => {
+                        return <FaStar key={i} size={15} color="#F25D27" />;
+                      })}
                     </div>
-                    <h2>Maria Eduarda</h2>
                   </div>
 
-                  <div className="stars">
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                  </div>
-                </div>
-
-                <p>
-                  Todos os produtos comercializados são de excelente qualidade,
-                  recomendo!
-                </p>
-              </Depoiment>
-              <Depoiment>
-                <div className="card-title">
-                  <div className="title-avatar">
-                    <div className="avatar-image">
-                      <AvatarImage src={Avatar} alt="" />
-                    </div>
-                    <h2>Maria Eduarda</h2>
-                  </div>
-
-                  <div className="stars">
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                    <FaStar size={15} color="#F25D27" />
-                  </div>
-                </div>
-
-                <p>
-                  Todos os produtos comercializados são de excelente qualidade,
-                  recomendo!
-                </p>
-              </Depoiment>
+                  <p>{deposition.description}</p>
+                </Depoiment>
+              ))}
             </DepoimentCards>
           </div>
 
@@ -244,3 +265,18 @@ export default function Place(): JSX.Element {
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps<IProps> = async context => {
+  const { id } = context.params as IParams;
+
+  const place = await api.get(`/place/${id}`);
+
+  return { props: { place: place.data } };
+};

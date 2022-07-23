@@ -100,10 +100,13 @@ export default function City({ city, places }: IndexProps): JSX.Element {
       Object.assign(place, {
         total_depositions_stars: place.total_depositions_stars,
         number_depositions: place.number_depositions,
-        average: (place.total_depositions_stars / place.number_depositions)
-          .toFixed(1)
-          .toString()
-          .replace('.', ','),
+        average:
+          place.number_depositions <= 0
+            ? '0'
+            : (place.total_depositions_stars / place.number_depositions)
+                .toFixed(1)
+                .toString()
+                .replace('.', ','),
       }),
     );
     // Realizar buscar de acordo com o filtro selecionado.
@@ -126,10 +129,13 @@ export default function City({ city, places }: IndexProps): JSX.Element {
         Object.assign(place, {
           total_depositions_stars: place.total_depositions_stars,
           number_depositions: place.number_depositions,
-          average: (place.total_depositions_stars / place.number_depositions)
-            .toFixed(1)
-            .toString()
-            .replace('.', ','),
+          average:
+            place.number_depositions <= 0
+              ? '0'
+              : (place.total_depositions_stars / place.number_depositions)
+                  .toFixed(1)
+                  .toString()
+                  .replace('.', ','),
         }),
       )
       .sort((prev, curr) =>
@@ -148,7 +154,7 @@ export default function City({ city, places }: IndexProps): JSX.Element {
     let counter = 0;
 
     for (let item of city.place) {
-      if (textFormat(item.name) === textFormat(name)) {
+      if (textFormat(item.category.name) === textFormat(name)) {
         counter++;
       }
     }
