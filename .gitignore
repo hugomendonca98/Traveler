@@ -7,6 +7,8 @@ anotações.md
 /node_modules
 /.pnp
 .pnp.js
+bun.lockb
+yarn.lock
 
 # testing
 /coverage
