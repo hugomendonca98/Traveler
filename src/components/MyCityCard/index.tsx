@@ -9,6 +9,7 @@ import {
   CardTitle,
   LinkCard,
 } from './styles';
+import { StaticImageData } from 'next/image';
 
 interface CityCardProps {
   image: string | StaticImageData;

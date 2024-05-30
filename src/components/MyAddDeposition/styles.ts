@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { colors } from '@/styles/Colors';
 import { darken } from 'polished';
+import { ButtonHTMLAttributes, LabelHTMLAttributes } from 'react';
 
 interface StarButtonProps {
   starColor: boolean;

@@ -114,9 +114,11 @@ export default function MyAddDeposition({
                 avatarSelected={avatar && avatar[0] ? true : false}
                 isError={!!errors.avatar}
               >
-                {avatar && avatar[0]
-                  ? 'Feito! Trocar foto'
-                  : 'Upload da sua foto'}
+                <>
+                  {avatar && avatar[0]
+                    ? 'Feito! Trocar foto'
+                    : 'Upload da sua foto'}
+                </>
               </AvatarLabel>
 
               <input

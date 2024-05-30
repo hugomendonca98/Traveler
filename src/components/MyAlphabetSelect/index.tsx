@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 
 import { OptionAlphabet, SelectAlphabet } from './styles';
 
@@ -19,7 +19,9 @@ export default function MyAlphabetSelect({
         isActive={isActive}
         name="alphabet"
         defaultValue={selected}
-        onChange={e => setSelected(e.target.value)}
+        onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+          setSelected(e.target.value)
+        }
       >
         <OptionAlphabet value="">A - Z</OptionAlphabet>
         <OptionAlphabet>A</OptionAlphabet>

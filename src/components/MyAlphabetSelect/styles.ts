@@ -1,4 +1,5 @@
 import { colors } from '@/styles/Colors';
+import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 interface SelectAlphabetProps {
